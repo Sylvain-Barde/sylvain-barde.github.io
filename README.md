@@ -1,7 +1,7 @@
 # sylvain-barde.github.io
 Sylvain Barde's Github pages site
 
-I am a Senior Lecturer in Economics at the University of Kent. 
+I am a Senior Lecturer in Economics at the University of Kent.
 
 email: sylvain.barde (at) kent.ac.uk
 
@@ -9,7 +9,9 @@ email: sylvain.barde (at) kent.ac.uk
 ## Research interests
 [Link to research](https://sylvain-barde.github.io/research.html)
 
-
+My research interests are:
+- Computational Economics
+- Econometrics
 
 ## Teaching
 
