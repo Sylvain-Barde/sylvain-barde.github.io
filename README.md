@@ -1,2 +1,2 @@
 # sylvain-barde.github.io
-Sylvain Barde's Guthub pages site
+Sylvain Barde's Github pages site
