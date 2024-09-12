@@ -7,7 +7,7 @@ email: sylvain.barde (at) kent.ac.uk
 
 
 ## Research interests
-[Link to research](https://sylvain-barde.githuh.io/research.md)
+[Link to research](https://sylvain-barde.github.io/research.md)
 
 
 
@@ -17,3 +17,5 @@ I teach the following modules:
 - ECON3050/60 - Mathematics for Economics (undergraduate)
 - ECON3090 - Statistics for Economics (undergraduate)
 - ECON8860 - Computational methods with Matlab (PhD)
+
+[Link to teaching resources](https://sylvain-barde.github.io/teaching.md)
