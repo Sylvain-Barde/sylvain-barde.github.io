@@ -1,3 +1,11 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: home
+---
+
+
 # sylvain-barde.github.io
 Sylvain Barde's Github pages site
 
@@ -7,7 +15,6 @@ email: sylvain.barde (at) kent.ac.uk
 
 
 ## Research interests
-[Link to research](https://sylvain-barde.github.io/research.html)
 
 My research interests are:
 - Computational Economics
@@ -19,5 +26,3 @@ I teach the following modules:
 - ECON3050/60 - Mathematics for Economics (undergraduate)
 - ECON3090 - Statistics for Economics (undergraduate)
 - ECON8860 - Computational methods with Matlab (PhD)
-
-[Link to teaching resources](https://sylvain-barde.github.io/teaching.md)
