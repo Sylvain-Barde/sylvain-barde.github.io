@@ -7,7 +7,7 @@ email: sylvain.barde (at) kent.ac.uk
 
 
 ## Research interests
-[Link to research](https://www.sylvain-barde.githuh.io/research.md)
+[Link to research](https://sylvain-barde.githuh.io/research.md)
 
 
 
