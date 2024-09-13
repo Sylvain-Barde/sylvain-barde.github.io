@@ -7,11 +7,10 @@ layout: home
 
 I am a Senior Lecturer in Economics at the University of Kent.
 
-# Research interests
-
 My research interests are:
 - Computational Economics
 - Econometrics
+
 
 # Teaching
 

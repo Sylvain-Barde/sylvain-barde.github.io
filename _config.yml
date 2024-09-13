@@ -20,7 +20,7 @@
 
 title: Sylvain Barde's personal pages
 author:
-  name: Sylvain barde
+  name: Sylvain Barde
   email: s.barde@kent.ac.uk
 
 description: >- # this means to ignore newlines until "baseurl:"
@@ -39,6 +39,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
+
+header_pages:
+  - research.md
+  - teaching.md
 
 # Minima specific settings, which are only available from Minima 3.0 onward.
 minima:
