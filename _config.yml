@@ -41,8 +41,8 @@ plugins:
   - jekyll-feed
 
 header_pages:
-  - research.md
-  - teaching.md
+  - research.markdown
+  - teaching.markdown
 
 # Minima specific settings, which are only available from Minima 3.0 onward.
 minima:
