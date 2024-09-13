@@ -43,6 +43,7 @@ plugins:
 header_pages:
   - research.markdown
   - teaching.markdown
+  - code.markdown
 
 # Minima specific settings, which are only available from Minima 3.0 onward.
 minima:
