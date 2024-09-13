@@ -21,14 +21,15 @@
 title: Sylvain Barde's personal pages
 email: s.barde@kent.ac.uk
 description: >- # this means to ignore newlines until "baseurl:"
-  This my personal webpage, designed to provide an overview of my research/teaching
+  This webpage provides an overview of my research/teaching
   activities and the various bits of code generated in the process. More details
-  on my research and code outputs are available through the links provided.
+  on my research and code outputs are available here.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://www.kent.ac.uk/economics/people/434/barde-sylvain" # the base hostname & protocol for your site, e.g. http://example.com
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+# url: "https://www.kent.ac.uk/economics/people/434/barde-sylvain" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
 # google_scholar_username: Sylvain Barde
-github_username:  Sylvain-Barde
+# github_username:  Sylvain-Barde
 
 # Build settings
 # theme: minima
