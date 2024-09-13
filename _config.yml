@@ -21,10 +21,9 @@
 title: Sylvain Barde's personal pages
 email: s.barde@kent.ac.uk
 description: >- # this means to ignore newlines until "baseurl:"
-  This my personal webpage, designed to provide an overview of my research and
-  teaching activities, as well as the various bits of code I generate in the
-  process. More details on my research and code outputs are available through
-  the links provided.
+  This my personal webpage, designed to provide an overview of my research/teaching
+  activities and the various bits of code generated in the process. More details
+  on my research and code outputs are available through the links provided.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
