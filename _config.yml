@@ -31,7 +31,8 @@ url: "https://www.kent.ac.uk/economics/people/434/barde-sylvain" # the base host
 github_username:  Sylvain-Barde
 
 # Build settings
-theme: minima
+# theme: minima
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
 
