@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: <a href='https://www.kent.ac.uk/economics/people/434/barde-sylvain'>Institutional page</a>
 
 profile:
   align: right
@@ -10,8 +10,8 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>244 Sibson Building</p>
-    <p>Parkwood road</p>
-    <p>Canterbury, CT2 7NP, United Kingdom</p>
+    <p>Parkwood road, Canterbury</p>
+    <p>CT2 7NZ, United Kingdom</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
