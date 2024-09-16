@@ -5,7 +5,7 @@ title: cv
 nav: true
 nav_order: 5
 cv_pdf: sylvain_barde_cv.pdf
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
+description: My curriculum vitae is provided below.  A PDF version is available for download
 toc:
   sidebar: left
 ---
