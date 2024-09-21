@@ -87,7 +87,7 @@
       "date": "2001-2002",
       "awarder": "Foreign, Commonwealth and Development Office, UK",
       "url": "https://www.chevening.org/",
-      "summary": "The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'"
+      "summary": "Chevening scholarships are the UK government's global scholarship programme, funded by the Foreign, Commonwealth and Development Office (FCDO), and are awarded to outstanding scholars with leadership potential."
     }
   ],
   "certificates": [
@@ -170,12 +170,62 @@
       "level": "Master",
       "icon": "fa-solid fa-code",
       "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
+        "General-purpose programming",
+        "numpy/scipy computational applications",
+        "torch/Pytorch for machine learning"
+      ]
+    },
+    {
+      "name": "Jupyter",
+      "level": "Master",
+      "icon": "fa-solid fa-code",
+      "keywords": [
+        "Interactive notebook widgets",
+        "RISE interactive slideshows",
+        "Data visualisation"
+      ]
+    },
+    {
+      "name": "C++",
+      "level": "Proficient",
+      "icon": "fa-solid fa-code",
+      "keywords": [
+        "ABM simulation models",
+        "Cython/Python integration"
+      ]
+    },
+    {
+      "name": "HTML",
+      "level": "Proficient",
+      "icon": "fa-solid fa-code",
+      "keywords": [
+        "Web development",
+        "Jupyter/RISE integration"
+      ]
+    },
+    {
+      "name": "MATLAB",
+      "level": "Master",
+      "icon": "fa-solid fa-window-maximize",
+      "keywords": [
+        "Computational applications",
+        "Teaching"
+      ]
+    },
+    {
+      "name": "Stata",
+      "level": "Master",
+      "icon": "fa-solid fa-window-maximize",
+      "keywords": [
+        "Econometric applications",
+      ]
+    },
+    {
+      "name": "QGIS",
+      "level": "Proficient",
+      "icon": "fa-solid fa-window-maximize",
+      "keywords": [
+        "GIS/spatial applications",
       ]
     }
   ],
