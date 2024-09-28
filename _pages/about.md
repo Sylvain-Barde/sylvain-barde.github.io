@@ -11,7 +11,7 @@ profile:
   more_info: >
     <p>244 Sibson Building</p>
     <p>Parkwood road, Canterbury</p>
-    <p>CT2 7NZ, United Kingdom</p>
+    <p>CT2 7FS, United Kingdom</p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
@@ -20,4 +20,4 @@ social: true # includes social icons at the bottom of the page
 
 I am a Senior Lecturer in Economics at the University of Kent.
 
-I have a wide range of interests and find it a bit tricky to categorise myself: i am part computational economist, part econometrician, with interests in spatial econometrics, regional science, agent based models and pretty much any economic problem that faces computational constraints.
+I have a wide range of interests and find it a bit tricky to categorise myself: I am part computational economist, part econometrician, with interests in spatial econometrics, regional science, agent based models and pretty much any economic problem that faces computational constraints.

@@ -5,7 +5,7 @@ permalink: /projects/
 description: Here is a collection of the various coding projects that might be helpful to others.
 nav: true
 nav_order: 3
-display_categories: [work, fun]
+display_categories: [research, teaching]
 horizontal: false
 ---
 
