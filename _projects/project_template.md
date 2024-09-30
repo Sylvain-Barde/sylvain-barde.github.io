@@ -8,14 +8,15 @@ category: research
 related_publications: true
 ---
 
+
+Just a placeholder for the moment, whilst I figure out the best way of organising the information!
+
 ### Table of contents
 - [Overview](#overview)
 - [Project contributions](#project-contributions)
 - [Areas of improvement](#areas-of-improvement)
 
 ### Overview
-
-This was one of my COVID projects. Like many, I found myself having more time than expected in closed quarters and needed something to channel the cabin fever... So I started scratching my head over the problem of estimating these large, computationally burdensome agent-based models.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">

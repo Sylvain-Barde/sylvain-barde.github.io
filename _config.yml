@@ -245,7 +245,7 @@ exclude:
   - lighthouse_results/
   - package.json
   - package-lock.json
-  - _pages/about_einstein.md
+  - _projects/project_template.md
   - purgecss.config.js
   - README.md
   - readme_preview/
@@ -630,7 +630,7 @@ third_party_libraries:
     version: "5.16.3"
 
 # -----------------------------------------------------------------------------
-# Get external JSON data
+# Get external JSON data for CV
 # -----------------------------------------------------------------------------
 
 jekyll_get_json:
