@@ -61,7 +61,7 @@ One neat thing that I hadn't initially realized is that this setup actually prov
     The empirical observation (horizontal line) now falls outside the range of the training data. In this case, the diffuse GP prior is actually a better predictor than the trained posterior. This leads the likelihood, on the right, to peak outside of the allowed parameter range, creating a degeneracy at the boundary.
 </div>
 
-As a practical example, I've applied the methodology to the Caiani et al model. It can take the original model 40 minutes to produce a usable 200-300 long macro time series, so in-the-loop simulation is out of the question. 1000 simulations of 200 observations each, using parametrizations drawn from a Sobol sequence, are enough to produce a decent set of estimates for the 12 free parameters.
+As a practical example, I've applied the methodology to the {% cite caiani2016agent %} model. It can take the original model 40 minutes to produce a usable 200-300 long macro time series, so in-the-loop simulation is out of the question. 1000 simulations of 200 observations each, using parametrizations drawn from a Sobol sequence, are enough to produce a decent set of estimates for the 12 free parameters.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
