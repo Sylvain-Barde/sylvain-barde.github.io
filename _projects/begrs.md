@@ -30,17 +30,17 @@ In many ways, this first pass at the problem is kind of low-tech: no Bayesian le
     </div>
 </div>
 <div class="caption">
-    The left plot shows the Gaussian process prior, which is a prior over the space of functions that could generate the data. The right shows the posterior, once the training data has been see. Note that of course, convergence only occurs in the region of the parameter space for which we have simulation data...
+    The left plot shows the Gaussian process prior, which is a prior over the space of functions that could generate the data. The right shows the posterior, once the training data has been seen. Note that of course, convergence only occurs in the region of the parameter space for which we have simulation data...
 </div>
 
-Once the GP surrogate is trained, it can be used in a second stage to provide a surrogate likelihood in a standard Bayesian estimation for an observation $y_t$, given $y_{t-1}$ and a parameter vector $\theta$. The only requirement the methodology has relative to standard Bayesian methods is that the prior on the parameter vector must constrain the parameter space to the hypercube within which the training parameter samples were drawn. The reason for this requirement is illustrated below.
+Once the GP surrogate is trained, it can be used in a second stage to provide a surrogate likelihood in a standard Bayesian estimation for an observation $$y_t$$, given $$y_{t-1}$$ and a parameter vector $$\theta$$. The only requirement the methodology has relative to standard Bayesian methods is that the prior on the parameter vector must constrain the parameter space to the hypercube within which the training parameter samples were drawn. The reason for this requirement is illustrated below.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/begrs/BegrsPlotGood.jpg" title="good case plot" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/begrs/GPlikelihoodGood.jpg" title="good case plot" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/begrs/GPlikelihoodGood.jpg" title="good case likelihood image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/begrs/BegrsPlotGood.jpg" title="good case likelihood image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -51,10 +51,10 @@ One neat thing that I hadn't initially realized is that this setup actually prov
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/begrs/BegrsPlotBad.jpg" title="bad case plot" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/begrs/GPlikelihoodBad.jpg" title="bad case plot" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/begrs/GPlikelihoodBad.jpg" title="bad case likelihood" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/begrs/BegrsPlotBad.jpg" title="bad case likelihood" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -75,11 +75,25 @@ As a practical example, I've applied the methodology to the Caiani et al model. 
 ### Project contributions
 #### What bits does this project reach that others don't?
 
-- Does not require retraining before estimation on different datasets.
-- Seems to perform well with limited training data, so 'mission accomplished' for the central aim.
-- Full Bayesian workflow, including posterior checks.
-- GP gradients are easy to compute, so Hamiltonian MCMC can be implemented out-of-the-box.
+The methodology as implemented has several nice characteristics:
+- GP gradients are easy to compute, so gradient-based methods, such as BFGS for finding the mode of the posterior or Hamiltonian MCMC for drawing posterior samples, can be implemented out-of-the-box.
+- Because the second stage parameter estimation (given the GP surrogate) is a standard Bayesian framework, a full Bayesian workflow can be followed, including posterior checks.
+- Finally, that the methodology seems to perform well with limited training data, so given all the compromises made on the surrogate model (see next section!) it's 'mission accomplished' for the central aim.
+- This is improved by the fact that the surrogate does not require retraining before estimation on different datasets. For instance, the same surrogate is used in the US empirical estimation above.
 
+As a sanity check, and an illustration of the last two points, I ran a simple Monte Carlo example, training a GP surrogate using 1000 simulations of VAR(1) models with 4 variables and 200 observations, where the 16 parameters of the autoregressive matrix were drawn from Sobol sequences. Both a parameter recovery exercise and a Simulated Bayesian Computing posterior show that the methodology performs well.
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/begrs/dens_var_uncorr_0.jpg" title="VAR estimation results" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/begrs/sbc_var_uncorr_0.jpg" title="VAR SBC results" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    The left plot shows the parameter densities obtained in a parameter recovery exercise: BEGRS compares favourably to ABC-SMC for a fraction of the simulation calls. The right plot shows that the SBC analysis reveals no issues with the posterior.
+</div>
 
 ### Areas of improvement
 #### Things I'm not that happy about right now.
