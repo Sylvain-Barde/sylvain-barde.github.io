@@ -15,6 +15,6 @@ nav_order: 2
 
 <div class="publications">
 
-{% bibliography --file my_papers %}
+{% bibliography --query @*[mine=true] %}
 
 </div>
