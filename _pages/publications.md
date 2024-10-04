@@ -13,6 +13,16 @@ nav_order: 2
 
 {% include bib_search.liquid %}
 
+#### Working papers
+
+<div class="publications">
+
+{% bibliography --query @*[wp=true] %}
+
+</div>
+
+#### Peer-reviewed papers
+
 <div class="publications">
 
 {% bibliography --query @*[mine=true] %}
