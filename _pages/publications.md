@@ -15,11 +15,7 @@ nav_order: 2
 
 #### Working papers
 
-<div class="publications">
-
 {% bibliography --query @*[wp=true] %}
-
-</div>
 
 #### Peer-reviewed papers
 
