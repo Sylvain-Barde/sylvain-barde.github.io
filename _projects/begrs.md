@@ -17,9 +17,9 @@ related_publications: true
 
 This was one of my COVID projects. Like many, I found myself having more time than expected, stuck in closed quarters, and I needed something to channel the cabin fever... So I started scratching my head over the problem of estimating the large, computationally burdensome agent-based models that my colleagues had developed over the years. There are plenty of indirect inference methods out there for estimating the deep parameters of simulation models, but these often rely on in-the-loop or open-ended simulations of the model. With large agent-based models that take minutes to generate a single simulation run, these methods just don't scale... I needed to find a way to do more with less.
 
-The full details for this are provided in {% cite barde2024bayesian %}, however, as a quick overview, the methodology uses a Gaussian process as a surrogate model for the one-step ahead prediction of the model given an observed state and some model parameters.
+The full details for this are provided in {% citet barde2024bayesian %}, however, as a quick overview, the methodology uses a Gaussian process as a surrogate model for the one-step ahead prediction of the model given an observed state and some model parameters.
 
-In many ways, this first pass at the problem is kind of low-tech: no Bayesian learning of the parameter space is carried out to acquire samples, no empirical data is used to generate deviations. All this is designed to reduce the compute burden involved in simulating the underling model.
+In many ways, this first pass at the problem is kind of low-tech: no Bayesian learning of the parameter space is carried out to acquire samples, no empirical data is used to generate deviations. All this is designed to reduce the compute burden involved in simulating the underling model. In practice, in order to keep the problem computationally tractable, the GP is trained using the variational methods of {% cite hensman2015scalable %} using the GPpytorch toolbox of { % cite gardner2018gpytorch % } to provide GPU acceleration.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -77,11 +77,11 @@ As a practical example, I've applied the methodology to the {% cite caiani2016ag
 
 The methodology as implemented has several nice characteristics:
 - GP gradients are easy to compute, so gradient-based methods, such as BFGS for finding the mode of the posterior or Hamiltonian MCMC for drawing posterior samples, can be implemented out-of-the-box.
-- Because the second stage parameter estimation (given the GP surrogate) is a standard Bayesian framework, a full Bayesian workflow can be followed, including posterior checks.
+- Because the second stage parameter estimation (given the GP surrogate) is a standard Bayesian framework, a full Bayesian workflow can be followed, including posterior checks, for example {% cite cook2006validation %}, or {% cite talts2018validating %}.
 - Finally, that the methodology seems to perform well with limited training data, so given all the compromises made on the surrogate model (see next section!) it's 'mission accomplished' for the central aim.
 - This is improved by the fact that the surrogate does not require retraining before estimation on different datasets. For instance, the same surrogate is used in the US empirical estimation above.
 
-As a sanity check, and an illustration of the last two points, I ran a simple Monte Carlo example, training a GP surrogate using 1000 simulations of VAR(1) models with 4 variables and 200 observations, where the 16 parameters of the autoregressive matrix were drawn from Sobol sequences. Both a parameter recovery exercise and a Simulated Bayesian Computing posterior show that the methodology performs well.
+As a sanity check, and an illustration of the last two points, I ran a simple Monte Carlo example, training a GP surrogate using 1000 simulations of VAR(1) models with 4 variables and 200 observations, where the 16 parameters of the autoregressive matrix were drawn from Sobol sequences. Both a parameter recovery exercise and a Simulated Bayesian Computing posterior check {% cite talts2018validating %} show that the methodology performs well.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
