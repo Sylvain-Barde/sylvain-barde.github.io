@@ -41,19 +41,17 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
     The are equivalent plots for the $N=30$ case. Crucially, even for such a small evaluation same, in every case the model rankings and p-values outputed by the updating algorithm exactly match those of the elimination algorithm.
 </div>
 
-
-|               | Elimination |             | | Two-pass   |             |
-|---------------|-------------|-------------|-|------------|-------------|
-|               |  Time (sec) | Memory (MB) | | Time (sec) | Memory (MB) |
-| $$M = 500$$   |        295  |      6,017  | |       3    |      23     |
-| $$M = 1000$$  |      2,318  |     24,055  | |      11    |      44     |
-| $$M = 2000$$  |     17,735  |     96,219  | |      67    |      86     |
-| $$M = 5000$$  |    265,314  |    601,399  | |     557    |     212     |
-| $$M = 10000$$ |  2,084,924  |  2,405,669  | |   2,441    |     423     |
+|            | Elimination |             | | Two-pass   |             |
+|------------|------------:|------------:|-|-----------:|------------:|
+|            |  Time (sec) | Memory (MB) | | Time (sec) | Memory (MB) |
+| M = 500    |        295  |      6,017  | |       3    |      23     |
+| M = 1,000  |      2,318  |     24,055  | |      11    |      44     |
+| M = 2,000  |     17,735  |     96,219  | |      67    |      86     |
+| M = 5,000  |    265,314  |    601,399  | |     557    |     212     |
+| M = 10,000 |  2,084,924  |  2,405,669  | |   2,441    |     423     |
 <div class="caption">
-    Bechmarking table in 'proper' units
+    Benchmarking table in 'human' units for collections of size M. The performance gains are huge, especially for larger collections.
 </div>
-
 
 
 ### Project contributions
