@@ -8,63 +8,64 @@ category: research
 related_publications: true
 ---
 
-Just a placeholder for the moment, whilst I figure out the best way of organising the information!
+### Table of contents
+- [Overview](#overview)
+- [Project contributions](#project-contributions)
+- [Areas of improvement](#areas-of-improvement)
+
+### Overview
+
+Updating version of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/fast_mcs/benchmark_time_N_250.jpg" title="Time benchmarking for N=250" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/fast_mcs/benchmark_mem_N_250.jpg" title="Memory benchmarking for N=250" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+    These plots show the time (left plot) and memory (right plot) benchmarking exercises in log units for en empirical sample of $N=250$ observations. The trajectories confirm the $$\mathcal{O}(N^3)$$ time comoplexity and $$\mathcal{O}(N^2)$$ memory requirement for the elimination algorithm. The equivelent requirements for the updating algorithm are $$\mathcal{O}(N^2)$$ and $$\mathcal{O}(N)$$ respectively.
 </div>
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/fast_mcs/benchmark_time_N_30.jpg" title="Time benchmarking for N=30" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/fast_mcs/benchmark_mem_N_30.jpg" title="Memory benchmarking for N=30" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-    This image can also have a caption. It's like magic.
+    The are equivelent plots for the $N=30$ case. Crucuially, even for such a small evaluation same, in every case the model rankings and p-values outputed by the updating algorithm exactly match those of the elimination algorithm.
 </div>
 
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+    |               | Elimination |             | | Two-pass   |             |
+    |---------------|-------------|-------------|-|------------|-------------|
+    |               |  Time (sec) | Memory (MB) | | Time (sec) | Memory (MB) |
+    | $$M = 500$$   |        295  |      6,017  | |       3    |      23     |
+    | $$M = 1000$$  |      2,318  |     24,055  | |      11    |      44     |
+    | $$M = 2000$$  |     17,735  |     96,219  | |      67    |      86     |
+    | $$M = 5000$$  |    265,314  |    601,399  | |     557    |     212     |
+    | $$M = 10000$$ |  2,084,924  |  2,405,669  | |   2,441    |     423     |
     </div>
 </div>
 <div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+    Bechmarking table in 'proper'
 </div>
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
 
-{% raw %}
 
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
+### Project contributions
+#### What bits does this project reach that others don't?
 
-{% endraw %}
+- Potentially re-introduces the possibility of collaborative research in the spirit of {% cite White_2000 %}
+
+
+### Areas of improvement
+#### Things I'm not that happy about right now.
+
+- Right now, this works for the R rule, it would be interesting to investigate whether similar updating algorithms also work for other equivelence rules (i.e. the max rule)

@@ -19,7 +19,7 @@ This was one of my COVID projects. Like many, I found myself having more time th
 
 The full details for this are provided in {% cite barde2024bayesian %}, however, as a quick overview, the methodology uses a Gaussian process as a surrogate model for the one-step ahead prediction of the model given an observed state and some model parameters.
 
-In many ways, this first pass at the problem is kind of low-tech: no Bayesian learning of the parameter space is carried out to acquire samples, no empirical data is used to generate deviations. All this is designed to reduce the compute burden involved in simulating the underling model. In practice, in order to keep the problem computationally tractable, the GP is trained using the variational methods of {% cite hensman2015scalable %} using the GPpytorch toolbox of { % cite gardner2018gpytorch % } to provide GPU acceleration.
+In many ways, this first pass at the problem is kind of low-tech: no Bayesian learning of the parameter space is carried out to acquire samples, no empirical data is used to generate deviations. All this is designed to reduce the compute burden involved in simulating the underling model. In practice, in order to keep the problem computationally tractable, the GP is trained using the variational methods of {% cite hensman2015scalable %} using the GPpytorch toolbox of {% cite gardner2018gpytorch %} to provide GPU acceleration.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
