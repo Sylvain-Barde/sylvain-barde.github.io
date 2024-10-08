@@ -7,7 +7,6 @@ importance: 1
 category: research
 related_publications: true
 pretty_table: true
-pseudocode: true
 ---
 
 ### Table of contents
