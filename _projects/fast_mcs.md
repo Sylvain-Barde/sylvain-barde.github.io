@@ -38,11 +38,11 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
     </div>
 </div>
 <div class="caption">
-    The are equivalent plots for the N=30 case. Crucially, even for such a small evaluation sample, in every case the model rankings and p-values outputed by the updating algorithm exactly match those of the elimination algorithm.
+    These are equivalent benchmarking plots for the N=30 case. Crucially, even for such a small evaluation sample, in every case the model rankings and p-values outputed by the updating algorithm exactly match those of the elimination algorithm.
 </div>
 
 <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0", markdown="block">
 
     |------------+-------------+-------------+-+------------+-------------|
     |            | Elimination |             | | Two-pass   |             |
