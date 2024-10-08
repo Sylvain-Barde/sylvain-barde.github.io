@@ -15,7 +15,7 @@ related_publications: true
 
 ### Overview
 
-Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}.
+Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}. Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The fastMCS updating implementation reduces this down to  a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -26,7 +26,7 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
     </div>
 </div>
 <div class="caption">
-    These plots show the time (left plot) and memory (right plot) benchmarking exercises in log units for an empirical sample of $N=250$ observations. The trajectories confirm the $\mathcal{O}(N^3)$ time complexity and $\mathcal{O}(N^2)$ memory requirement for the elimination algorithm. The equivalent requirements for the updating algorithm are $\mathcal{O}(N^2)$ and $\mathcal{O}(N)$ respectively.
+    These plots show the time (left plot) and memory (right plot) benchmarking exercises in log units for an empirical sample of $N=250$ observations. The trajectories confirm the cubic time complexity and quadratic memory requirement for the elimination algorithm. The equivalent requirements for the updating algorithm are quadratic and linear respectively.
 </div>
 
 <div class="row">
@@ -41,16 +41,20 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
     The are equivalent plots for the $N=30$ case. Crucially, even for such a small evaluation same, in every case the model rankings and p-values outputed by the updating algorithm exactly match those of the elimination algorithm.
 </div>
 
+|------------+-------------+-------------+-+------------+-------------|
 |            | Elimination |             | | Two-pass   |             |
 |------------|------------:|------------:|-|-----------:|------------:|
 |            |  Time (sec) | Memory (MB) | | Time (sec) | Memory (MB) |
+|------------+-------------+-------------+-+------------+-------------|
 | M = 500    |        295  |      6,017  | |       3    |      23     |
 | M = 1,000  |      2,318  |     24,055  | |      11    |      44     |
 | M = 2,000  |     17,735  |     96,219  | |      67    |      86     |
 | M = 5,000  |    265,314  |    601,399  | |     557    |     212     |
 | M = 10,000 |  2,084,924  |  2,405,669  | |   2,441    |     423     |
+|------------+-------------+-------------+-+------------+-------------|
+
 <div class="caption">
-    Benchmarking table in 'human' units for collections of size M. The performance gains are huge, especially for larger collections.
+    Benchmarking table in 'human' units for collections of size . The performance gains are huge, especially for larger collections.
 </div>
 
 
