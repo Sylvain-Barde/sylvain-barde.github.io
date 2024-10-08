@@ -6,6 +6,7 @@ img: assets/img/benchmark_mcs.jpg
 importance: 1
 category: research
 related_publications: true
+pretty_table: true
 ---
 
 ### Table of contents
@@ -41,23 +42,7 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
     These are equivalent benchmarking plots for the N=30 case. Crucially, even for such a small evaluation sample, in every case the model rankings and p-values outputed by the updating algorithm exactly match those of the elimination algorithm.
 </div>
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0", markdown="block">
-
-    |------------+-------------+-------------+-+------------+-------------|
-    |            | Elimination |             | | Two-pass   |             |
-    |------------|------------:|------------:|-|-----------:|------------:|
-    |            |  Time (sec) | Memory (MB) | | Time (sec) | Memory (MB) |
-    |------------+-------------+-------------+-+------------+-------------|
-    | M = 500    |        295  |      6,017  | |       3    |      23     |
-    | M = 1,000  |      2,318  |     24,055  | |      11    |      44     |
-    | M = 2,000  |     17,735  |     96,219  | |      67    |      86     |
-    | M = 5,000  |    265,314  |    601,399  | |     557    |     212     |
-    | M = 10,000 |  2,084,924  |  2,405,669  | |   2,441    |     423     |
-    |------------+-------------+-------------+-+------------+-------------|
-
-    </div>
-</div>
+These improved scaling characteristics are illustrated by the following table, which extrapolate the benchmarking results obtained for the elimination MCS to larger collections. The last row indicated that a collection of 10,000 models would require 579 hours (~24 days) to process and require 2.4 TB of RAM in doing so. The fastMCS version can achieve  this in 40 minutes with 423 MB.
 
 |------------+-------------+-------------+-+------------+-------------|
 |            | Elimination |             | | Two-pass   |             |
