@@ -51,13 +51,13 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
 \caption{Elimination MCS}
 \begin{algorithmic}
   \REQUIRE $$L$$: $$N \times M$$ matrix of losses
-  \REQUIRE $\mathcal{B}$: $$N \times B$$ matrix of bootstrap indexes
-  \STATE $$t \gets $$ Calculate matrix of t-statistics with (1)
-  \STATE $$\tau \gets$$ Calculate matrices of bootstrapped statistics with (2)
-  \FOR{$$k=0 \TO |\mathcal{M}|$$}
-    \STATE $$e_k, T_1 \gets$$ Find worst model with elimination rule (3)
-    \STATE $$\mathcal{T}_{k,b} \gets$$ Find bootstrapped statistics (4)
-    \STATE $$P_k \gets$$ Calculate bootstrapped p-value (4)
+  \REQUIRE $$\mathcal{B}$$: $$N \times B$$ matrix of bootstrap indexes
+  \STATE $$t$$ \GETS Calculate matrix of t-statistics with (1)
+  \STATE $$\tau$$ \GETS Calculate matrices of bootstrapped statistics with (2)
+  \FOR{$$k=0$$ \TO $$|\mathcal{M}|$$}
+    \STATE $$e_k, T_1$$ \GETS Find worst model with elimination rule (3)
+    \STATE $$\mathcal{T}_{k,b}$$ \GETS Find bootstrapped statistics (4)
+    \STATE $$P_k$$ \GETS Calculate bootstrapped p-value (4)
     \STATE Remove row/column $$e_k$$ from $$t$$ and $$\tau$$
   \ENDFOR
   \RETURN $$e,T,P$$
