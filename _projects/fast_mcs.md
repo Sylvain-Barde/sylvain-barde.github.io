@@ -46,6 +46,27 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
 \end{algorithm}
 ```
 
+```pseudocode
+\begin{algorithm}
+\caption{Elimination MCS}
+\begin{algorithmic}
+  \Require $$L$$: $$N \times M$$ matrix of losses
+  \Require $\mathcal{B}$: $$N \times B$$ matrix of bootstrap indexes
+  \Statex
+  \State $$t \gets $$ Calculate matrix of t-statistics with (1)
+  \State $$\tau \gets$$ Calculate matrices of bootstrapped statistics with (2)
+  \For{$$k=0\rightarrow |\mathcal{M}|$$}
+    \State $$e_k, T_1 \gets$$ Find worst model with elimination rule (3)
+    \State $$\mathcal{T}_{k,b} \gets$$ Find bootstrapped statistics (4)
+    \State $$P_k \gets$$ Calculate bootstrapped p-value (4)
+    \State Remove row/column $$e_k$$ from $$t$$ and $$\tau$$
+  \EndFor
+  \Statex
+  \noindent \Return $$e,T,P$$
+\end{algorithmic}
+\end{algorithm}
+```
+
 Details are provided in {% cite barde4907732large %}.
 
 <div class="row">
