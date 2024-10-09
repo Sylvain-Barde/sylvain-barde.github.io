@@ -7,6 +7,7 @@ importance: 1
 category: research
 related_publications: true
 pretty_table: true
+pseudocode: true
 ---
 
 ### Table of contents
@@ -17,6 +18,33 @@ pretty_table: true
 ### Overview
 
 Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}. Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement.
+
+```pseudocode
+\begin{algorithm}
+\caption{Quicksort}
+\begin{algorithmic}
+\PROCEDURE{Quicksort}{$$A, p, r$$}
+    \IF{$$p < r$$}
+        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
+        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
+        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
+    \ENDIF
+\ENDPROCEDURE
+\PROCEDURE{Partition}{$$A, p, r$$}
+    \STATE $$x = A[r]$$
+    \STATE $$i = p - 1$$
+    \FOR{$$j = p$$ \TO $$r - 1$$}
+        \IF{$$A[j] < x$$}
+            \STATE $$i = i + 1$$
+            \STATE exchange
+            $$A[i]$$ with $$A[j]$$
+        \ENDIF
+        \STATE exchange $$A[i]$$ with $$A[r]$$
+    \ENDFOR
+\ENDPROCEDURE
+\end{algorithmic}
+\end{algorithm}
+```
 
 Details are provided in {% cite barde4907732large %}.
 
