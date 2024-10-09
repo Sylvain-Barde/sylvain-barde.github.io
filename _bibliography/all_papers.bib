@@ -9,8 +9,12 @@
   title={Large-Scale Model Comparison with Fast Model Confidence Sets},
   author={Barde, Sylvain},
   journal={SSRN Working Paper No. 4907732},
+  abstract = {The paper proposes a new algorithm for finding the confidence set of a collection of forecasts or prediction models. Existing numerical implementations use an elimination approach, where one starts with the full collection of models and successively eliminates the worst performing until the null of equal predictive ability is no longer rejected at a given confidence level. The intuition behind the proposed implementation lies in reversing the process, i.e. starting with a collection of two models and updating both the model rankings and p-values as models are successively added to the collection. The first benefit of this approach is a reduction of one polynomial order in both the time complexity and memory cost of finding the confidence set of a collection of M models, falling respectively from O(M^3) to O(M^2) and from O(M^2) to O(M). The second key benefit is that it allows for further models to be added at a later point in time, thus enabling collaborative efforts using the model confidence set procedure. We prove that this implementation is equivalent to the elimination approach and demonstrate the improved performance on a multivariate GARCH collection consisting of 4800 models.},
+  year={2024},
+  publisher={Elsevier},
   selected={true},
-  wp = {true}
+  wp = {true},
+  doi={10.2139/ssrn.4907732}
 }
 
 %----------------------------------------------------------------------------------------------------------------------------------------------------
