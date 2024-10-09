@@ -9,9 +9,14 @@ nav_order: 2
 
 <!-- _pages/publications.md -->
 
+- [Working papers](#working-papers)
+- [Peer-reviewed papers](#peer-reviewed-papers)
+
 <!-- Bibsearch Feature -->
 
 {% include bib_search.liquid %}
+
+* * *
 
 #### Working papers
 
@@ -20,6 +25,8 @@ nav_order: 2
 {% bibliography --query @*[wp=true] %}
 
 </div>
+
+ * * *
 
 #### Peer-reviewed papers
 
