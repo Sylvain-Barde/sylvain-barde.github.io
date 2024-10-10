@@ -17,7 +17,9 @@ pseudocode: true
 
 ### Overview
 
-Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}. Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement.
+This project provides a fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}. It is actually an old project that has evolved over the years. Its origin lies in when I was working on my application of the MIC to agent-based model selection on financial markets {% cite barde2016direct %}. Because the MIC is essentially a noisy measurement of the AIC for simulation models, one needs to account for the fact that differences in model rankings may not be statistically significant. A colleague helpfully suggested the MCS approach, which at the time was relatively new, which was helpful. However, with the 513 specifications used in the analysis, it took a *looooong* time to run, and attempts at larger collections rapidly exhausted the 8GB of RAM on my desktop (In those days, that was considered a lot).
+
+This prompted me to investigate the scaling characteristics of the MCS approach, and see if it was possible to improve on this. The intuition laid out below arrived quickly, but the proof of equivalence took much longer (embarrassingly so I'm afraid to say). Details of all this, in particular the proofs is provided in {% cite barde4907732large %}. The MCS approach uses losses $$\mathcal{L}$$ for a collection of $$M$$ models, and iteratively identifies the worst performing model and eliminates it from the collection if the performance is significantly worse. This process continues until the null of equal predictive ability cannot be rejected for the candidate model, and the surviving models comprise the MCS. This process, referred to as the *elimination implementation*, requires an appropriate elimination statistic to identify the candidate model and a suitable bootstrap for the P-values, however it is incredible intuitive. The following algorithm summarizes the procedure. (NEED EQUATIONS)
 
 ```pseudocode
 \begin{algorithm}
@@ -46,6 +48,41 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
 \end{algorithm}
 ```
 
+Foo placeholder
+
+
+```pseudocode
+\begin{algorithm}
+\caption{Elimination MCS}
+\begin{algorithmic}
+\PROCEDURE{Quicksort}{$$A, p, r$$}
+    \IF{$$p < r$$}
+        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
+        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
+        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
+    \ENDIF
+\ENDPROCEDURE
+\PROCEDURE{Partition}{$$A, p, r$$}
+    \STATE $$x = A[r]$$
+    \STATE $$i = p - 1$$
+    \FOR{$$j = p$$ \TO $$r - 1$$}
+        \IF{$$A[j] < x$$}
+            \STATE $$i = i + 1$$
+            \STATE exchange
+            $$A[i]$$ with $$A[j]$$
+        \ENDIF
+        \STATE exchange $$A[i]$$ with $$A[r]$$
+    \ENDFOR
+\ENDPROCEDURE
+\end{algorithmic}
+\end{algorithm}
+```
+
+Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The former comes from the fact that the model will have $$\mathcal{O}(M)$$ iterations, each requiring finding the maximum of an $$M \times M$$ matrix. The latter comes from having to store $B$ bootstrapped versions of the original $$M \times M$$ elimination statistics.
+
+The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by
+
+
 ```pseudocode
 \begin{algorithm}
 \caption{Elimination MCS}
@@ -65,7 +102,7 @@ Fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite
 \end{algorithm}
 ```
 
-Details are provided in {% cite barde4907732large %}.
+The paper {% cite barde4907732large %} runs a benchmarking exercise using the original Monte-Carlo testing exercise of {% cite Hansen_et_al_2011 %}, the results of which are provided in the figures below.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -78,6 +115,8 @@ Details are provided in {% cite barde4907732large %}.
 <div class="caption">
     These plots show the time (left plot) and memory (right plot) benchmarking exercises in log units for an empirical sample of N=250 observations. The trajectories confirm the cubic time complexity and quadratic memory requirement for the elimination algorithm. The equivalent requirements for the updating algorithm are quadratic and linear respectively.
 </div>
+
+The two algorithms (elimination and fastMCS) are proven to provide equivalent output, however this is an 'almost surely as $$N \to \infty$$' result. I'm not that worried, as the practical rate of convergence is likely to be very fast, as the elimination statistic is an order statistic, due to the fact we are looking at a 'maximum'. To be safe I ran a second exercise with $$N=30$$ to check for any deviations. The two algorithms still provide identical output, even for this small sample size.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
