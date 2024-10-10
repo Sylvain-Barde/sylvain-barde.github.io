@@ -25,8 +25,8 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
 \begin{algorithm}
 \caption{Elimination MCS}
 \begin{algorithmic}
-\REQUIRE $$L$$: $$N$$ by $$M$$ matrix of losses
-\REQUIRE $$Bi$$: $$N$$ by $$B$$ matrix of bootstrap indexes
+\REQUIRE $$L$$, an $$N$$ by $$M$$ matrix of losses
+\REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{Eliminate}{$$L, Bi$$}
   \STATE $$t \gets $$ Calculate matrix of t-statistics with (1)
   \STATE $$tau \gets $$ Calculate matrices of bootstrapped statistics with (2)
