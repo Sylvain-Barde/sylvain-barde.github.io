@@ -28,12 +28,12 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
 \REQUIRE $$L$$, an $$N$$ by $$M$$ matrix of losses
 \REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{Eliminate}{$$L, Bi$$}
-  \STATE $$t \gets $$ Calculate matrix of t-statistics with (1)
-  \STATE $$tau \gets $$ Calculate matrices of bootstrapped statistics with (2)
+  \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
+  \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
   \FOR{$$k = 0$$ \TO $$M$$}
-    \STATE $$e, T \gets $$ Find worst model with elimination rule (3)
-    \STATE $$T \gets $$ Find bootstrapped statistics (4)
-    \STATE $$P \gets $$ Calculate bootstrapped p-value (4)
+    \STATE $$e, T <= $$ Find worst model with elimination rule (3)
+    \STATE $$T <= $$ Find bootstrapped statistics (4)
+    \STATE $$P <= $$ Calculate bootstrapped p-value (4)
     \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
 \ENDPROCEDURE
