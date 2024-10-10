@@ -56,8 +56,7 @@ Foo placeholder
 \caption{Elimination MCS}
 \begin{algorithmic}
 \PROCEDURE{Eliminate}{$$L, B$$}
-  \STATE $$t \rightarrow$$ Calculate matrix of t-statistics with (1)
-  \STATE $$\tau \rightarrow$$ Calculate matrices of bootstrapped statistics with (2)
+  \STATE $$t = $$ foo
     \IF{$$p < r$$}
         \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
         \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
