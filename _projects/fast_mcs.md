@@ -57,12 +57,12 @@ Foo placeholder
 \begin{algorithmic}
 \PROCEDURE{Eliminate}{$$L, B$$}
   \STATE $$t = $$ Calculate matrix of t-statistics with (1)
-  \STATE $$\tau = $$ Calculate matrices of bootstrapped statistics with (2)
+  \STATE $$t_b = $$ Calculate matrices of bootstrapped statistics with (2)
   \FOR{$$k = 0$$ \TO $$|M|$$}
     \STATE $$e_k, T_1 = $$ Find worst model with elimination rule (3)
     \STATE $$T_{k,b} = $$ Find bootstrapped statistics (4)
     \STATE $$P_k = $$ Calculate bootstrapped p-value (4)
-    \STATE Remove row/column $$e_k$$ from $$t$$ and $$\tau$$
+    \STATE Remove row/column $$e_k$$ from $$t$$ and $$t_b$$
   \ENDFOR
 \ENDPROCEDURE
 \end{algorithmic}
