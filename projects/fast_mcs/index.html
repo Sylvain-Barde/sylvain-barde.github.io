@@ -4,12 +4,12 @@
 \REQUIRE $$L$$, an $$N$$ by $$M$$ matrix of losses
 \REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{Eliminate}{$$L, Bi$$}
-  \STATE $$t \gets $$ Calculate matrix of t-statistics with (1)
-  \STATE $$tau \gets $$ Calculate matrices of bootstrapped statistics with (2)
+  \STATE $$t &lt;= $$ Calculate matrix of t-statistics with (1)
+  \STATE $$tau &lt;= $$ Calculate matrices of bootstrapped statistics with (2)
   \FOR{$$k = 0$$ \TO $$M$$}
-    \STATE $$e, T \gets $$ Find worst model with elimination rule (3)
-    \STATE $$T \gets $$ Find bootstrapped statistics (4)
-    \STATE $$P \gets $$ Calculate bootstrapped p-value (4)
+    \STATE $$e, T &lt;= $$ Find worst model with elimination rule (3)
+    \STATE $$T &lt;= $$ Find bootstrapped statistics (4)
+    \STATE $$P &lt;= $$ Calculate bootstrapped p-value (4)
     \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
 \ENDPROCEDURE
