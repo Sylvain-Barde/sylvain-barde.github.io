@@ -25,8 +25,8 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
 \begin{algorithm}
 \caption{Elimination MCS}
 \begin{algorithmic}
-\REQUIRE $$L$$, an $$N$$ by $$M$$ matrix of losses
-\REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
+\REQUIRE $$L$$: an $$N$$ by $$M$$ matrix of losses
+\REQUIRE $$Bi$$: an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{Eliminate}{$$L, Bi$$}
   \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
   \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
@@ -48,19 +48,20 @@ The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ 
 
 ```pseudocode
 \begin{algorithm}
-\caption{Elimination MCS}
+\caption{Two-pass Fast updating MCS}
 \begin{algorithmic}
-  \REQUIRE $$L$$: $$N \times M$$ matrix of losses
-  \REQUIRE $$\textsl{B}$$: $$N \times B$$ matrix of bootstrap indexes
-  \STATE $$t \rightarrow$$ Calculate matrix of t-statistics with (1)
-  \STATE $$\tau \rightarrow$$ Calculate matrices of bootstrapped statistics with (2)
-  \FOR{$$k=0$$ \TO $$|\textsl{M}|$$}
-    \STATE $$e_k, T_1 \rightarrow$$ Find worst model with elimination rule (3)
-    \STATE $$\textsl{T}_{k,b} \rightarrow$$ Find bootstrapped statistics (4)
-    \STATE $$P_k \rightarrow$$ Calculate bootstrapped p-value (4)
-    \STATE Remove row/column $$e_k$$ from $$t$$ and $$\tau$$
+\REQUIRE $L$: an $N$ by $M$ matrix of losses
+\REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
+\PROCEDURE{Eliminate}{$$L, Bi$$}
+  \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
+  \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
+  \FOR{$$k = 0$$ \TO $$M$$}
+    \STATE $$e, T <= $$ Find worst model with elimination rule (3)
+    \STATE $$T <= $$ Find bootstrapped statistics (4)
+    \STATE $$P <= $$ Calculate bootstrapped p-value (4)
+    \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
-  \RETURN $$e,T,P$$
+\ENDPROCEDURE
 \end{algorithmic}
 \end{algorithm}
 ```
