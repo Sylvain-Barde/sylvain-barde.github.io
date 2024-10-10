@@ -55,7 +55,7 @@ Foo placeholder
 \begin{algorithm}
 \caption{Elimination MCS}
 \begin{algorithmic}
-\PROCEDURE{ELIMINATE}{$$ \textsl{L}, \textsl{B}$$}
+\PROCEDURE{Eliminate}{$$L, B$$}
   \STATE $$t \rightarrow$$ Calculate matrix of t-statistics with (1)
   \STATE $$\tau \rightarrow$$ Calculate matrices of bootstrapped statistics with (2)
     \IF{$$p < r$$}
