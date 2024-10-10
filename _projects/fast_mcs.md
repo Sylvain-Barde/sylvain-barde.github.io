@@ -23,46 +23,18 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
 
 ```pseudocode
 \begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p < r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] < x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}
-```
-
-Foo placeholder
-
-
-```pseudocode
-\begin{algorithm}
 \caption{Elimination MCS}
 \begin{algorithmic}
-\PROCEDURE{Eliminate}{$$L, B$$}
-  \STATE $$t = $$ Calculate matrix of t-statistics with (1)
-  \STATE $$t2 = $$ Calculate matrices of bootstrapped statistics with (2)
+\REQUIRE $$L$$: $$N$$ by $$M$$ matrix of losses
+\REQUIRE $$Bi$$: $$N$$ by $$B$$ matrix of bootstrap indexes
+\PROCEDURE{Eliminate}{$$L, Bi$$}
+  \STATE $$t \gets $$ Calculate matrix of t-statistics with (1)
+  \STATE $$tau \gets $$ Calculate matrices of bootstrapped statistics with (2)
   \FOR{$$k = 0$$ \TO $$M$$}
-    \STATE $$e, T = $$ Find worst model with elimination rule (3)
-    \STATE $$T= $$ Find bootstrapped statistics (4)
-    \STATE $$P = $$ Calculate bootstrapped p-value (4)
-    \STATE Remove row/column $$e$$ from $$t$$ and $$t$$
+    \STATE $$e, T \gets $$ Find worst model with elimination rule (3)
+    \STATE $$T \gets $$ Find bootstrapped statistics (4)
+    \STATE $$P \gets $$ Calculate bootstrapped p-value (4)
+    \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
 \ENDPROCEDURE
 \end{algorithmic}
