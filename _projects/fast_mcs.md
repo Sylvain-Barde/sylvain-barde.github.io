@@ -56,7 +56,7 @@ Foo placeholder
 \caption{Elimination MCS}
 \begin{algorithmic}
 \PROCEDURE{Eliminate}{$$L, B$$}
-  \STATE $$t = $$ foo
+  \STATE $$t = $$ Calculate matrix of t-statistics with (1)
     \IF{$$p < r$$}
         \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
         \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
