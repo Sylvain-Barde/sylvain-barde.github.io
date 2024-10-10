@@ -55,7 +55,6 @@ Foo placeholder
 \begin{algorithm}
 \caption{Elimination MCS}
 \begin{algorithmic}
-\REQUIRE $$L$$: $$N \times M$$ matrix of losses
 \PROCEDURE{Quicksort}{$$A, p, r$$}
     \IF{$$p < r$$}
         \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
