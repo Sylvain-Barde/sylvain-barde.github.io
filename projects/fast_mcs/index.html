@@ -27,11 +27,13 @@
 \begin{algorithmic}
 \PROCEDURE{Eliminate}{$$L, B$$}
   \STATE $$t = $$ Calculate matrix of t-statistics with (1)
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
+  \STATE $$\tau = $$ Calculate matrices of bootstrapped statistics with (2)
+  \FOR{$$k = 0$$ \TO $$|M|$$}
+    \STATE $$e_k, T_1 = $$ Find worst model with elimination rule (3)
+    \STATE $$T_{k,b} = $$ Find bootstrapped statistics (4)
+    \STATE $$P_k = $$ Calculate bootstrapped p-value (4)
+    \STATE Remove row/column $$e_k$$ from $$t$$ and $$\tau$$
+  \ENDFOR
 \ENDPROCEDURE
 \end{algorithmic}
 \end{algorithm}
