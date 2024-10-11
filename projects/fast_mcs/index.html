@@ -23,8 +23,9 @@
 \REQUIRE $L$ $L$: an $N$ by $M$ matrix of losses
 \REQUIRE $L$, an $N$ by $M$ matrix of losses
 \REQUIRE{ $L$ $L$: an $N$ by $M$ matrix of losses}
-\REQUIRE \\(L\\): an \\(N\\) by \\(M\\) matrix of losses
 \REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
+\REQUIRE an $N$ by $M$ matrix of losses $L$
+\REQUIRE an $N$ by $B$ matrix of bootstrap indexes $Bi$
 \PROCEDURE{Eliminate}{$$L, Bi$$}
   \STATE $$t &lt;= $$ Calculate matrix of t-statistics with (1)
   \STATE $$tau &lt;= $$ Calculate matrices of bootstrapped statistics with (2)
