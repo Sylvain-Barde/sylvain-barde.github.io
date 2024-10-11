@@ -53,6 +53,8 @@ The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ 
 \REQUIRE $L$: an $N$ by $M$ matrix of losses
 \REQUIRE $ $ $L$: an $N$ by $M$ matrix of losses
 \REQUIRE $L$ $L$: an $N$ by $M$ matrix of losses
+\REQUIRE $L$, an $N$ by $M$ matrix of losses
+\REQUIRE{ $L$ $L$: an $N$ by $M$ matrix of losses}
 \REQUIRE \\(L\\): an \\(N\\) by \\(M\\) matrix of losses
 \REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{Eliminate}{$$L, Bi$$}
