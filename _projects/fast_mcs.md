@@ -55,8 +55,9 @@ The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ 
 \REQUIRE $L$ $L$: an $N$ by $M$ matrix of losses
 \REQUIRE $L$, an $N$ by $M$ matrix of losses
 \REQUIRE{ $L$ $L$: an $N$ by $M$ matrix of losses}
-\REQUIRE \\(L\\): an \\(N\\) by \\(M\\) matrix of losses
 \REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
+\REQUIRE an $N$ by $M$ matrix of losses $L$
+\REQUIRE an $N$ by $B$ matrix of bootstrap indexes $Bi$
 \PROCEDURE{Eliminate}{$$L, Bi$$}
   \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
   \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
