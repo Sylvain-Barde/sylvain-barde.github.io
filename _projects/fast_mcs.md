@@ -32,11 +32,12 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
   \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
   \FOR{$$k = 0$$ \TO $$M$$}
     \STATE $$e, T <= $$ Find worst model with elimination rule (3)
-    \STATE $$T <= $$ Find bootstrapped statistics (4)
-    \STATE $$P <= $$ Calculate bootstrapped p-value (4)
+    \STATE $$Tb <= $$ Find bootstrapped statistics with (4)
+    \STATE $$P <= $$ Calculate bootstrapped p-value with (4)
     \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
 \ENDPROCEDURE
+\RETURN $$T$$, $$P$$
 \end{algorithmic}
 \end{algorithm}
 ```
@@ -50,24 +51,22 @@ The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ 
 \begin{algorithm}
 \caption{Two-pass Fast updating MCS}
 \begin{algorithmic}
-\REQUIRE $L$: an $N$ by $M$ matrix of losses
-\REQUIRE $ $ $L$: an $N$ by $M$ matrix of losses
-\REQUIRE $L$ $L$: an $N$ by $M$ matrix of losses
-\REQUIRE $L$, an $N$ by $M$ matrix of losses
-\REQUIRE{ $L$ $L$: an $N$ by $M$ matrix of losses}
-\REQUIRE $$Bi$$, an $$N$$ by $$B$$ matrix of bootstrap indexes
-\REQUIRE an $N$ by $M$ matrix of losses $L$.
-\REQUIRE an $N$ by $B$ matrix of bootstrap indexes $\mathcal{B}$.
-\PROCEDURE{Eliminate}{$L, \mathcal{B}$}
+\REQUIRE $$L$$: an $$N$$ by $$M$$ matrix of losses
+\REQUIRE $$Bi$$: an $$N$$ by $$B$$ matrix of bootstrap indexes
+\PROCEDURE{ModelRankings}{$$L$$}
   \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
-  \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
-  \FOR{$$k = 0$$ \TO $$M$$}
-    \STATE $$e, T <= $$ Find worst model with elimination rule (3)
-    \STATE $$T <= $$ Find bootstrapped statistics (4)
-    \STATE $$P <= $$ Calculate bootstrapped p-value (4)
-    \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
+  \STATE $$T <= $$ Update model rankings with (5)
+\ENDPROCEDURE
+\STATE $$e <= $$ Sort models by ascending value of $T$
+\PROCEDURE{Pvalues}{$$L,Bi,e$$}
+  \FOR{$$i = 0$$ \TO $$M$$}
+    \STATE $$m <= e[i]$$
+    \STATE $$tau <= $$ Calculate vectors of bootstrapped statistics with (2)
+    \STATE $$Tb <= $$ Update bootstrapped statistics with (6)
+    \STATE $$P <= $$ Calculate bootstrapped p-value with (4)
   \ENDFOR
 \ENDPROCEDURE
+\RETURN $$T$$, $$P$$
 \end{algorithmic}
 \end{algorithm}
 ```
