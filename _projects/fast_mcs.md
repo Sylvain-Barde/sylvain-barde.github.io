@@ -44,8 +44,9 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
 
 Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The former comes from the fact that the model will have $$\mathcal{O}(M)$$ iterations, each requiring finding the maximum of an $$M \times M$$ matrix. The latter comes from having to store $B$ bootstrapped versions of the original $$M \times M$$ elimination statistics.
 
-The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by
+The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the alogorithm starts with a collection of 1 model, successviely adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS)
 
+The two-pass version of the fast updating algorithm is outlined below:
 
 ```pseudocode
 \begin{algorithm}
@@ -54,10 +55,10 @@ The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ 
 \REQUIRE $$L$$: an $$N$$ by $$M$$ matrix of losses
 \REQUIRE $$Bi$$: an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{ModelRankings}{$$L$$}
-  \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
+  \STATE $$t <= $$ Calculate vector of t-statistics with (1)
   \STATE $$T <= $$ Update model rankings with (5)
 \ENDPROCEDURE
-\STATE $$e <= $$ Sort models by ascending value of $T$
+\STATE $$e <= $$ Sort models by ascending value of $$T$$
 \PROCEDURE{Pvalues}{$$L,Bi,e$$}
   \FOR{$$i = 0$$ \TO $$M$$}
     \STATE $$m <= e[i]$$
