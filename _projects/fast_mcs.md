@@ -19,7 +19,34 @@ pseudocode: true
 
 This project provides a fast updating implementation of the Model Confidence Set (MCS) algorithm {% cite Hansen_et_al_2011 %}. It is actually an old project that has evolved over the years. Its origin lies in when I was working on my application of the MIC to agent-based model selection on financial markets {% cite barde2016direct %}. Because the MIC is essentially a noisy measurement of the AIC for simulation models, one needs to account for the fact that differences in model rankings may not be statistically significant. A colleague helpfully suggested the MCS approach, which at the time was relatively new, which was helpful. However, with the 513 specifications used in the analysis, it took a *looooong* time to run, and attempts at larger collections rapidly exhausted the 8GB of RAM on my desktop (In those days, that was considered a lot).
 
-This prompted me to investigate the scaling characteristics of the MCS approach, and see if it was possible to improve on this. The intuition laid out below arrived quickly, but the proof of equivalence took much longer (embarrassingly so I'm afraid to say). Details of all this, in particular the proofs is provided in {% cite barde4907732large %}. The MCS approach uses losses $$\mathcal{L}$$ for a collection of $$M$$ models, and iteratively identifies the worst performing model and eliminates it from the collection if the performance is significantly worse. This process continues until the null of equal predictive ability cannot be rejected for the candidate model, and the surviving models comprise the MCS. This process, referred to as the *elimination implementation*, requires an appropriate elimination statistic to identify the candidate model and a suitable bootstrap for the P-values, however it is incredible intuitive. The following algorithm summarizes the procedure. (NEED EQUATIONS)
+This prompted me to investigate the scaling characteristics of the MCS approach, and see if it was possible to improve on this. The intuition laid out below arrived quickly, but the proof of equivalence took much longer (embarrassingly so I'm afraid to say). Details of all this, in particular the proofs is provided in {% cite barde4907732large %}. The MCS approach uses losses $$\mathcal{L}$$ for a collection of $$M$$ models, and iteratively identifies the worst performing model and eliminates it from the collection if the performance is significantly worse. This process continues until the null of equal predictive ability cannot be rejected for the candidate model, and the surviving models comprise the MCS. This process, referred to as the *elimination implementation*, requires an appropriate elimination statistic to identify the candidate model and a suitable bootstrap for the P-values, however it is incredibly intuitive.
+
+The MCS procedure requires an $$N \times M$$ set of losses $$L$$, in order to calculate the relative loss $$d_{i,j,n} \equiv L_{n,i}  - L_{n,j}$$ of model $i$ relative to model $j$. These are used to calculate the following set of t-statistics under the null hypothesis that all pairwise deviations are zero-valued, i.e. $$H_0: E[\bar d_{i,j}]=0$$:
+
+\begin{equation}
+\label{eq:tstat}
+t_{i,j}  = \frac{ \bar  d_{i,j} }{ \sqrt {{\rm Var}_b\left({ \delta_{i,j,b}}\right)}}
+\end{equation}
+
+The standard deviation of the sample average $$\bar d_{i,j}$$ is estimated using a bootstrap, where a set of $$N \times B$$ bootstrap indices $$\mathcal{B}$$ allows us to generate an $$N \times M \times B$$ array of resampled loss matrices $$\mathcal{L}$$. This is used to calculate resampled pairwise deviations:
+\begin{equation}
+\label{eq:bootstrapped_d}
+\delta_{i,j,b} =  \frac{ \sum_n \left(\mathcal{L}_{n,i,b}-\mathcal{L}_{n,j,b} \right) }{N}
+\end{equation}
+
+Finally, under the range (R) rule - which is the one used as the basis of the fastMCS procesure, the worst-performing model, also the candidate for elimination in any iteration, is the one having the largest pairwise t-statistic $$t_{i,j}$$, i.e. the one that has the highest average normalized loss relative to any other model still in the collection.
+\begin{align}
+\label{eq:elimination}
+e_k = \arg \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} \left(t_{i,j}\right) & &  T_{e_k} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}}|t_{i,j}|
+\end{align}
+
+The distribution of this elimination statistic, which is used to test $H_0$ against the alternate hypothesis $$H_A: E[\bar d_{i,j}] \ne 0$$, is obtained using bootstrapped pairwise deviations:
+\begin{equation}
+\label{eq:bootstrapped_T}
+\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \sqrt {{\rm Var}_b\left({ \delta_{i,j,b}}\right)}}
+\end{equation}
+
+The following algorithm summarizes the MCS procedure.
 
 ```pseudocode
 \begin{algorithm}
