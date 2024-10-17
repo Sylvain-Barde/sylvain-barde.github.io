@@ -25,25 +25,28 @@ The MCS procedure requires an $$N \times M$$ set of losses $$L$$, in order to ca
 
 \begin{equation}
 \label{eq:tstat}
-t_{i,j}  = \frac{ \bar  d_{i,j} }{ \sqrt {\mathrm{Var}_b\left({ \delta_{i,j,b}}\right)}}
+t_{i,j}  = \frac{ \bar  d_{i,j} }{ \sqrt{ \mathrm{Var}_b \left( \delta_{i,j,b} \right)}}
 \end{equation}
 
 The standard deviation of the sample average $$\bar d_{i,j}$$ is estimated using a bootstrap, where a set of $$N \times B$$ bootstrap indices $$\mathcal{B}$$ allows us to generate an $$N \times M \times B$$ array of resampled loss matrices $$\mathcal{L}$$. This is used to calculate resampled pairwise deviations:
+
 \begin{equation}
 \label{eq:bootstrapped_d}
-\delta_{i,j,b} =  \frac{ \sum_n \left(\mathcal{L}_{n,i,b}-\mathcal{L}_{n,j,b} \right) }{N}
+\delta_{i,j,b} =  \frac{ \sum_n \left( \mathcal{L}_{n,i,b} - \mathcal{L}_{n,j,b} \right) }{N}
 \end{equation}
 
 Finally, under the range (R) rule - which is the one used as the basis of the fastMCS procesure, the worst-performing model, also the candidate for elimination in any iteration, is the one having the largest pairwise t-statistic $$t_{i,j}$$, i.e. the one that has the highest average normalized loss relative to any other model still in the collection.
+
 \begin{align}
 \label{eq:elimination}
 e_k = \arg \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} \left(t_{i,j}\right) & &  T_{e_k} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}}|t_{i,j}|
 \end{align}
 
 The distribution of this elimination statistic, which is used to test $H_0$ against the alternate hypothesis $$H_A: E[\bar d_{i,j}] \ne 0$$, is obtained using bootstrapped pairwise deviations:
+
 \begin{equation}
 \label{eq:bootstrapped_T}
-\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \sqrt {\mathrm{Var}_b\left({ \delta_{i,j,b}}\right)}}
+\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \sqrt{ \mathrm{Var}_b\left( \delta_{i,j,b} \right)}}
 \end{equation}
 
 The following algorithm summarizes the MCS procedure.
