@@ -25,7 +25,7 @@ The MCS procedure requires an $$N \times M$$ set of losses $$L$$, in order to ca
 
 \begin{equation}
 \label{eq:tstat}
-t_{i,j}  = \frac{ \bar  d_{i,j} }{ \sqrt {{\rm Var}_b\left({ \delta_{i,j,b}}\right)}}
+t_{i,j}  = \frac{ \bar  d_{i,j} }{ \sqrt {\mathrm{Var}_b\left({ \delta_{i,j,b}}\right)}}
 \end{equation}
 
 The standard deviation of the sample average $$\bar d_{i,j}$$ is estimated using a bootstrap, where a set of $$N \times B$$ bootstrap indices $$\mathcal{B}$$ allows us to generate an $$N \times M \times B$$ array of resampled loss matrices $$\mathcal{L}$$. This is used to calculate resampled pairwise deviations:
@@ -43,7 +43,7 @@ e_k = \arg \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} \left(t_{i,j}\right
 The distribution of this elimination statistic, which is used to test $H_0$ against the alternate hypothesis $$H_A: E[\bar d_{i,j}] \ne 0$$, is obtained using bootstrapped pairwise deviations:
 \begin{equation}
 \label{eq:bootstrapped_T}
-\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \sqrt {{\rm Var}_b\left({ \delta_{i,j,b}}\right)}}
+\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \sqrt {\mathrm{Var}_b\left({ \delta_{i,j,b}}\right)}}
 \end{equation}
 
 The following algorithm summarizes the MCS procedure.
