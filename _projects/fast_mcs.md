@@ -25,6 +25,11 @@ The MCS procedure requires an $$N \times M$$ set of losses $$L$$, in order to ca
 
 \begin{equation}
 \label{eq:tstat}
+t_{i,j}  = \frac{ \bar  d_{i,j} }{ \hat \sigma_b \left( \delta_{i,j,b} \right)}
+\end{equation}
+
+\begin{equation}
+\label{eq:tstat}
 t_{i,j}  = \frac{ \bar  d_{i,j} }{ \sqrt{ \mathrm{Var}_b \left( \delta_{i,j,b} \right)}}
 \end{equation}
 
