@@ -32,24 +32,31 @@ The standard deviation of the sample average $$\bar d_{i,j}$$ is estimated using
 
 \begin{equation}
 \label{eq:bootstrapped_d}
-\delta_{i,j,b} =  \frac{1}{N} \sum_n \left( \mathcal{L} _{n,i,b} - \mathcal{L} _{n,j,b} \right)
+\delta_{i,j,b} =  \frac{1}{N} \sum_n \left( \mathcal{L} _{n,i,b} - \mathcal{L} _{n,j,b} \right) \tag{2}
 \end{equation}
 
-Finally, under the range (R) rule - which is the one used as the basis of the fastMCS procedure, the worst-performing model, also the candidate for elimination in any iteration, is the one having the largest pairwise t-statistic $$t_{i,j}$$, i.e. the one that has the highest average normalized loss relative to any other model still in the collection.
+Under the range (R) rule - which is the one used as the basis of the fastMCS procedure, the worst-performing model, also the candidate for elimination in any iteration, is the one having the largest pairwise t-statistic $$t_{i,j}$$, i.e. the one that has the highest average normalized loss relative to any other model still in the collection.
 
 \begin{align}
 \label{eq:elimination}
-e_k = \arg \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} \left(t_{i,j}\right) & &  T_{e_k} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}}|t_{i,j}|
+e_k = \arg \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} \left(t_{i,j}\right) & &  T_{e_k} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}}|t_{i,j}| \tag{3}
 \end{align}
 
-The distribution of this elimination statistic, which is used to test $H_0$ against the alternate hypothesis $$H_A: E[\bar d_{i,j}] \ne 0$$, is obtained using bootstrapped pairwise deviations:
+The distribution of this elimination statistic, which is used to test $$H_0$$ against the alternate hypothesis $$H_A: E[\bar d_{i,j}] \ne 0$$, is obtained using bootstrapped pairwise deviations:
 
 \begin{equation}
 \label{eq:bootstrapped_T}
-\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \sqrt{ \mathrm{Var}_b\left( \delta_{i,j,b} \right)}}
+\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \hat \sigma_b \left( \delta_{i,j,b} \right)} \tag{4}
 \end{equation}
 
-The following algorithm summarizes the MCS procedure.
+These are used to generate the bootstrapped elimination statistics and associated bootstrapped p-values, where $$I(\dots)$$ is the Boolean indicator function:
+
+\begin{align}
+\label{eq:p-value}
+\mathcal{T} _{e_k,b} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} |\tau_{i,j,b}| & & P_{e_k}  = \max\left(P_{e_{k-1}},\frac{1}{B}\sum\nolimits_b {I\left( \mathcal{T} _{e_k,b}  \ge T_{e_k}  \right)}\right)
+\end{align}
+
+The following algorithm summarizes the MCS iterative elimination procedure.
 
 ```pseudocode
 \begin{algorithm}
@@ -59,11 +66,11 @@ The following algorithm summarizes the MCS procedure.
 \REQUIRE $$Bi$$: an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{Eliminate}{$$L, Bi$$}
   \STATE $$t <= $$ Calculate matrix of t-statistics with (1)
-  \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (2)
+  \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (4)
   \FOR{$$k = 0$$ \TO $$M$$}
     \STATE $$e, T <= $$ Find worst model with elimination rule (3)
-    \STATE $$Tb <= $$ Find bootstrapped statistics with (4)
-    \STATE $$P <= $$ Calculate bootstrapped p-value with (4)
+    \STATE $$Tb <= $$ Find bootstrapped statistics with (3)
+    \STATE $$P <= $$ Calculate bootstrapped p-value with (5)
     \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
 \ENDPROCEDURE
