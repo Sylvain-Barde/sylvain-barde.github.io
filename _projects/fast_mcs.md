@@ -53,7 +53,7 @@ These are used to generate the bootstrapped elimination statistics and associate
 
 \begin{align}
 \label{eq:p-value}
-\mathcal{T} _{e_k,b} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} |\tau_{i,j,b}| & & P_{e_k}  = \max\left(P_{e_{k-1}},\frac{1}{B}\sum\nolimits_b {I\left( \mathcal{T} _{e_k,b}  \ge T_{e_k}  \right)}\right)
+ \mathcal{T}_ {e_k,b} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} |\tau_{i,j,b}| & & P_{e_k}  = \max\left(P_{e_{k-1}},\frac{1}{B}\sum\nolimits_b {I\left( \mathcal{T}_ {e_k,b}  \ge T_{e_k}  \right)}\right)  \tag{5}
 \end{align}
 
 The following algorithm summarizes the MCS iterative elimination procedure.
@@ -69,7 +69,7 @@ The following algorithm summarizes the MCS iterative elimination procedure.
   \STATE $$tau <= $$ Calculate matrices of bootstrapped statistics with (4)
   \FOR{$$k = 0$$ \TO $$M$$}
     \STATE $$e, T <= $$ Find worst model with elimination rule (3)
-    \STATE $$Tb <= $$ Find bootstrapped statistics with (3)
+    \STATE $$Tb <= $$ Find bootstrapped statistics with (5)
     \STATE $$P <= $$ Calculate bootstrapped p-value with (5)
     \STATE Remove row/column $$e$$ from $$t$$ and $$tau$$
   \ENDFOR
@@ -81,9 +81,29 @@ The following algorithm summarizes the MCS iterative elimination procedure.
 
 Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The former comes from the fact that the model will have $$\mathcal{O}(M)$$ iterations, each requiring finding the maximum of an $$M \times M$$ matrix. The latter comes from having to store $B$ bootstrapped versions of the original $$M \times M$$ elimination statistics.
 
-The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the alogorithm starts with a collection of 1 model, successviely adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS)
+The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the alogorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS) $$\mathcal{E}_{m}^{+}$$
 
-The two-pass version of the fast updating algorithm is outlined below:
+\begin{equation}
+\label{eq:rank_update}
+\left\{
+ \begin{aligned}
+ T_k & = T'_ k & \qquad \forall \enspace k \in \mathcal{E}_{m}^{+} \\
+ T_m & = \mathop {\max }\limits_i \left( { t_{m,i} } \right) & \qquad \forall \enspace i \in \mathcal{M}' \\
+ T_k & = \max \left( {T'_ k ,t_{k,m} } \right) & \qquad \forall \enspace k \in \mathcal{E}_{m}^{-} \\
+ \end{aligned} \right. \tag{6}
+\end{equation}
+
+The bootstrapped t-statistics are updated using a similar set of rules:
+
+\left\{
+ \begin{aligned}
+   \mathcal{T}_ {k,b} & = \mathcal{T}'_ {k,b} & \qquad \forall \enspace k \in \mathcal{E}_{m}^{+} \\
+   \mathcal{T}_ {m,b} & = \max \left(\mathcal{T}'_ {m^+,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right) & \qquad i \in \mathcal{E}_{m}^{+} \\
+   \mathcal{T}_ {k,b} = \max \left(\mathcal{T}'_ {k,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right)  \qquad \forall \enspace k \in \mathcal{E}_ {m}^{-}, i\in\mathcal{E}_{k}^{+} \\
+ \end{aligned}\right.
+\end{equation}
+
+Note the updating rules (7) only actually work under the restrictive (and unrealistic) assumptions that when a model $$m$$ is added it does not disturn the rankings of worse-ranked models. Details of why this is are provided in the paper, however this explains why a 2-pass approach is used. Given this, the two-pass version of the fast updating algorithm is outlined below:
 
 ```pseudocode
 \begin{algorithm}
@@ -93,14 +113,14 @@ The two-pass version of the fast updating algorithm is outlined below:
 \REQUIRE $$Bi$$: an $$N$$ by $$B$$ matrix of bootstrap indexes
 \PROCEDURE{ModelRankings}{$$L$$}
   \STATE $$t <= $$ Calculate vector of t-statistics with (1)
-  \STATE $$T <= $$ Update model rankings with (5)
+  \STATE $$T <= $$ Update model rankings with (6)
 \ENDPROCEDURE
 \STATE $$e <= $$ Sort models by ascending value of $$T$$
 \PROCEDURE{Pvalues}{$$L,Bi,e$$}
   \FOR{$$i = 0$$ \TO $$M$$}
     \STATE $$m <= e[i]$$
-    \STATE $$tau <= $$ Calculate vectors of bootstrapped statistics with (2)
-    \STATE $$Tb <= $$ Update bootstrapped statistics with (6)
+    \STATE $$tau <= $$ Calculate vectors of bootstrapped statistics with (4)
+    \STATE $$Tb <= $$ Update bootstrapped statistics with (7)
     \STATE $$P <= $$ Calculate bootstrapped p-value with (4)
   \ENDFOR
 \ENDPROCEDURE
