@@ -81,29 +81,24 @@ The following algorithm summarizes the MCS iterative elimination procedure.
 
 Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The former comes from the fact that the model will have $$\mathcal{O}(M)$$ iterations, each requiring finding the maximum of an $$M \times M$$ matrix. The latter comes from having to store $B$ bootstrapped versions of the original $$M \times M$$ elimination statistics.
 
-The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the alogorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS) $$\mathcal{E}_{m}^{+}$$
+The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the algorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS) $$\mathcal{E}_{m}^{+}$$
 
-\begin{equation}
-\label{eq:rank_update}
-\left\{
- \begin{aligned}
+
+\begin{align}
  T_k & = T'_ k & \qquad \forall \enspace k \in \mathcal{E} _m^+ \\
  T_m & = \mathop {\max }\limits_i \left( { t_{m,i} } \right) & \qquad \forall \enspace i \in \mathcal{M}' \\
  T_k & = \max \left( {T'_ k ,t_{k,m} } \right) & \qquad \forall \enspace k \in \mathcal{E} _m^- \\
- \end{aligned} \right. \tag{6}
-\end{equation}
+ \tag{6}
+\end{align}
 
 The bootstrapped t-statistics are updated using a similar set of rules:
 
-\begin{equation}
-\label{eq:prob_update}
-\left\{
- \begin{aligned}
+\begin{align}
    \mathcal{T}_ {k,b} & = \mathcal{T}'_ {k,b} & \qquad \forall \enspace k \in \mathcal{E} _m^+ \\
    \mathcal{T}_ {m,b} & = \max \left(\mathcal{T}'_ {m^+,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right) & \qquad i \in \mathcal{E}_{m}^{+} \\
    \mathcal{T}_ {k,b} = \max \left(\mathcal{T}'_ {k,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right)  \qquad \forall \enspace k \in \mathcal{E}_ m^-, i\in\mathcal{E} _k^+ \\
- \end{aligned}\right.  \tag{7}
-\end{equation}
+   \tag{7}
+\end{align}
 
 Note the updating rules (7) only actually work under the restrictive (and unrealistic) assumptions that when a model $$m$$ is added it does not disturb the rankings of worse-ranked models. Details of why this is are provided in the paper, however this explains why a 2-pass approach is used. Given this, the two-pass version of the fast updating algorithm is outlined below:
 
