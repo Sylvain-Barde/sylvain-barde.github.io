@@ -27,24 +27,17 @@ $$ t_{i,j}  = \frac{ \bar  d_{i,j} }{ \hat \sigma_b \left( \delta_{i,j,b} \right
 
 The standard deviation of the sample average $$\bar d_{i,j}$$ is estimated using a bootstrap, where a set of $$N \times B$$ bootstrap indices $$\mathcal{B}$$ allows us to generate an $$N \times M \times B$$ array of resampled loss matrices $$\mathcal{L}$$. This is used to calculate resampled pairwise deviations:
 
-\begin{equation}
-\label{eq:bootstrapped_d}
-\delta_{i,j,b} =  \frac{1}{N} \sum_n \left( \mathcal{L} _{n,i,b} - \mathcal{L} _{n,j,b} \right) \tag{2}
-\end{equation}
+$$ \delta_{i,j,b} =  \frac{1}{N} \sum_n \left( \mathcal{L} _{n,i,b} - \mathcal{L} _{n,j,b} \right) \tag{2} $$
 
 Under the range (R) rule - which is the one used as the basis of the fastMCS procedure, the worst-performing model, also the candidate for elimination in any iteration, is the one having the largest pairwise t-statistic $$t_{i,j}$$, i.e. the one that has the highest average normalized loss relative to any other model still in the collection.
 
 \begin{align}
-\label{eq:elimination}
 e_k = \arg \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}} \left(t_{i,j}\right) & &  T_{e_k} = \max_{i \in \mathcal{M}} \max_{j \in \mathcal{M}}|t_{i,j}| \tag{3}
 \end{align}
 
 The distribution of this elimination statistic, which is used to test $$H_0$$ against the alternate hypothesis $$H_A: E[\bar d_{i,j}] \ne 0$$, is obtained using bootstrapped pairwise deviations:
 
-\begin{equation}
-\label{eq:bootstrapped_T}
-\tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \hat \sigma_b \left( \delta_{i,j,b} \right)} \tag{4}
-\end{equation}
+$$ \tau_{i,j,b} = \frac{ \delta_{i,j,b} - \bar d_{i,j}}{ \hat \sigma_b \left( \delta_{i,j,b} \right)} \tag{4} $$
 
 These are used to generate the bootstrapped elimination statistics and associated bootstrapped p-values, where $$I(\dots)$$ is the Boolean indicator function:
 
@@ -78,8 +71,7 @@ The following algorithm summarizes the MCS iterative elimination procedure.
 
 Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The former comes from the fact that the model will have $$\mathcal{O}(M)$$ iterations, each requiring finding the maximum of an $$M \times M$$ matrix. The latter comes from having to store $B$ bootstrapped versions of the original $$M \times M$$ elimination statistics.
 
-The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the algorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS) $$\mathcal{E}_{m}^{+}$$
-
+The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the algorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and p-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. Given a model $$m$$ added to an existing collection, the vector of elimination statistics (and thererefore the elimination sequence) can be updated using the following rules, where $$\mathcal{E}_ {m}^{-}$$ and $$\mathcal{E}_ {m}^{+}$$ denote the set of models eliminated respectively *before* and *after* $$m$$:
 
 $$ \left\{
  \begin{align}
@@ -90,17 +82,14 @@ $$ \left\{
 
 The bootstrapped t-statistics are updated using a similar set of rules:
 
-\begin{equation}
-\label{eq:prob_update}
-\left\{
- \begin{aligned}
+$$ \left\{
+ \begin{align}
    \mathcal{T}_ {k,b} & = \mathcal{T}'_ {k,b} & \qquad \forall \enspace k \in \mathcal{E} \_m^+ \\
    \mathcal{T}_ {m,b} & = \max \left(\mathcal{T}'_ {m^+,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right) & \qquad i \in \mathcal{E} \_{m}^{+} \\
    \mathcal{T}_ {k,b} = \max \left(\mathcal{T}'_ {k,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right)  \qquad \forall \enspace k \in \mathcal{E}_ m^-, i\in\mathcal{E} _k^+ \\
- \end{aligned}\right.  \tag{7}
-\end{equation}
+ \end{aligned}\right.  \tag{7} $$
 
-Note the updating rules (7) only actually work under the restrictive (and unrealistic) assumptions that when a model $$m$$ is added it does not disturb the rankings of worse-ranked models. Details of why this is are provided in the paper, however this explains why a 2-pass approach is used. Given this, the two-pass version of the fast updating algorithm is outlined below:
+Note the updating rules (7) only actually work under the restrictive (and unrealistic) assumptions that when a model $$m$$ is added it does not disturb the rankings of worse-ranked models. Details of why this is are provided in the paper, however this provides intuition as to why a 2-pass approach is used: The first pass generates the elimination statistics, and this the model rankings. In the second pass, models are processed in reverse elimination order to obtain the p-values. Given this, the two-pass version of the fast updating algorithm is outlined below:
 
 ```pseudocode
 \begin{algorithm}
