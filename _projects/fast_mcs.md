@@ -23,10 +23,7 @@ This prompted me to investigate the scaling characteristics of the MCS approach,
 
 The MCS procedure requires an $$N \times M$$ set of losses $$L$$, in order to calculate the relative loss $$d_{i,j,n} \equiv L_{n,i}  - L_{n,j}$$ of model $i$ relative to model $j$. These are used to calculate the following set of t-statistics under the null hypothesis that all expected mean pairwise deviations are zero-valued, i.e. $$H_0: E[\bar d_{i,j}]=0$$:
 
-\begin{equation}
-\label{eq:tstat}
-t_{i,j}  = \frac{ \bar  d_{i,j} }{ \hat \sigma_b \left( \delta_{i,j,b} \right)} \tag{1}
-\end{equation}
+$$ t_{i,j}  = \frac{ \bar  d_{i,j} }{ \hat \sigma_b \left( \delta_{i,j,b} \right)} \tag{1} $$
 
 The standard deviation of the sample average $$\bar d_{i,j}$$ is estimated using a bootstrap, where a set of $$N \times B$$ bootstrap indices $$\mathcal{B}$$ allows us to generate an $$N \times M \times B$$ array of resampled loss matrices $$\mathcal{L}$$. This is used to calculate resampled pairwise deviations:
 
@@ -84,15 +81,12 @@ Given a candidate collection of $$M$$ models, the elimination implementation has
 The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the algorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and P-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. (NEED EQUATIONS) $$\mathcal{E}_{m}^{+}$$
 
 
-\begin{equation}
-\label{eq:rank_update}
-\left\{
- \begin{aligned}
+$$ \left\{
+ \begin{align}
  T_k & = T'_ k & \qquad \forall \enspace k \in \mathcal{E} \_m^+ \\
  T_m & = \mathop {\max }\limits_i \left( { t_{m,i} } \right) & \qquad \forall \enspace i \in \mathcal{M}' \\
  T_k & = \max \left( {T'_ k ,t_{k,m} } \right) & \qquad \forall \enspace k \in \mathcal{E} _m^- \\
- \end{aligned} \right. \tag{6}
-\end{equation}
+ \end{align} \right. \tag{6} $$
 
 The bootstrapped t-statistics are updated using a similar set of rules:
 
