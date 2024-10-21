@@ -86,7 +86,7 @@ $$ \left\{
  \begin{align}
    \mathcal{T}_ {k,b} & = \mathcal{T}'_ {k,b} & \qquad \forall \enspace k \in \mathcal{E} \_m^+ \\
    \mathcal{T}_ {m,b} & = \max \left(\mathcal{T}'_ {m^+,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right) & \qquad i \in \mathcal{E} \_{m}^{+} \\
-   \mathcal{T}_ {k,b} & = \max \left(\mathcal{T}'_ {k,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right)  \qquad \forall \enspace k \in \mathcal{E}_ m^-, i\in\mathcal{E} _k^+ \\
+   \mathcal{T}_ {k,b} & = \max \left(\mathcal{T}'_ {k,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right) & \qquad \forall \enspace k \in \mathcal{E}_ m^-, i\in\mathcal{E} _k^+ \\
  \end{align}\right.  \tag{7} $$
 
 Note the updating rules (6) can be shown to work for all models $$m$$ that are not in the set of superior models $$\mathcal{M}$$. The updating rules (7) only actually work under the restrictive (and unrealistic) assumptions that when a model $$m$$ is added it does not disturb the rankings of worse-ranked models. Nevertheless, this is enough to establish that the updating algorithm 2 will provide identical output to the elimination algorithm 1 for all models not in the superior set $$\mathcal{M}$$. Details of why this is are provided in the paper, however this provides intuition as to why a 2-pass approach is used: The first pass generates the elimination statistics, and this the model rankings. In the second pass, models are processed in reverse elimination order to obtain the p-values. Given this, the two-pass version of the fast updating algorithm is outlined below:
