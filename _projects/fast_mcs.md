@@ -71,7 +71,7 @@ The following algorithm summarizes the MCS iterative elimination procedure.
 
 Given a candidate collection of $$M$$ models, the elimination implementation has a $$\mathcal{O}(M^3)$$ time complexity and a $$\mathcal{O}(M^2)$$ memory requirement. The former comes from the fact that the model will have $$\mathcal{O}(M)$$ iterations, each requiring finding the maximum of an $$M \times M$$ matrix. The latter comes from having to store $B$ bootstrapped versions of the original $$M \times M$$ elimination statistics.
 
-The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the algorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and p-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. Given a model $$m$$ added to an existing collection, the vector of elimination statistics (and thererefore the elimination sequence) can be updated using the following rules, where $$\mathcal{E}_ {m}^{-}$$ and $$\mathcal{E}_ {m}^{+}$$ denote the set of models eliminated respectively *before* and *after* $$m$$:
+The fastMCS updating implementation reduces this down to a $$\mathcal{O}(M^2)$$ time complexity and a $$\mathcal{O}(M)$$ memory requirement. This is done by flipping the processing sequence, i.e. the algorithm starts with a collection of 1 model, successively adds models (rather than removing them), updating the existing rankings and p-values. Computationally, this means that each iteration now only processes vectors, rather than matrices, which explains the reduction of all requirements (time and memory) by one polynomial order. Given a model $$m$$ added to an existing collection, the vector of elimination statistics (and thererefore the elimination sequence) of the exisiting collection $$T_k$$, can be updated using the following rules, where $$\mathcal{E}_ {m}^{-}$$ and $$\mathcal{E}_ {m}^{+}$$ denote the set of models eliminated respectively *before* and *after* $$m$$:
 
 $$ \left\{
  \begin{align}
@@ -80,14 +80,14 @@ $$ \left\{
  T_k & = \max \left( {T'_ k ,t_{k,m} } \right) & \qquad \forall \enspace k \in \mathcal{E} _m^- \\
  \end{align} \right. \tag{6} $$
 
-The bootstrapped t-statistics are updated using a similar set of rules:
+The bootstrapped t-statistics of the previous collection, $$\mathcal{T}'_ {k,b}$$ are updated using a similar set of rules:
 
 $$ \left\{
  \begin{align}
    \mathcal{T}_ {k,b} & = \mathcal{T}'_ {k,b} & \qquad \forall \enspace k \in \mathcal{E} \_m^+ \\
    \mathcal{T}_ {m,b} & = \max \left(\mathcal{T}'_ {m^+,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right) & \qquad i \in \mathcal{E} \_{m}^{+} \\
    \mathcal{T}_ {k,b} = \max \left(\mathcal{T}'_ {k,b} \, , \, \mathop {\max }\limits_i |\tau_{m,i,b}| \right)  \qquad \forall \enspace k \in \mathcal{E}_ m^-, i\in\mathcal{E} _k^+ \\
- \end{aligned}\right.  \tag{7} $$
+ \end{align}\right.  \tag{7} $$
 
 Note the updating rules (7) only actually work under the restrictive (and unrealistic) assumptions that when a model $$m$$ is added it does not disturb the rankings of worse-ranked models. Details of why this is are provided in the paper, however this provides intuition as to why a 2-pass approach is used: The first pass generates the elimination statistics, and this the model rankings. In the second pass, models are processed in reverse elimination order to obtain the p-values. Given this, the two-pass version of the fast updating algorithm is outlined below:
 
