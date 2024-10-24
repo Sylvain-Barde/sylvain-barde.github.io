@@ -31,10 +31,10 @@ Formally the cross entropy estimate is obtained by using the length of the compr
 The algorithm used as the basis of the MIC is the Context Tree Weighting (CTW) compression of {% cite willems1995context %}, which is proven to achieve the Rissanen bound, which is the maximum achievable compression efficiency. The details of this are provided in the paper {% cite barde2017practical %}, however the key feature that enables the CTW compression method to achieve the theoretical Rissanen bound is the fact that it relies on the Krichevsky-Trofimov (KT) estimator {% cite krichevsky1981performance %} to provide the estimate the probability that a given bit of data will be 1, conditional on the information in the context. Because the CTW, using KT estimators at the bit-level, achieves the Rissanen bound, and the formula for the bound is know, it is possible to subtract this theoretical bound from the description length and obtain an unbiased measurement of the cross entropy between the model (as embodied in the training data that it has generated) and the empirical data.
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/mic/MIC_raw.jpg" title="Description length of an i.i.d beta variable given training length" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/mic/MIC_corrected.jpg" title="MIC of an i.i.d beta variable given training length" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
@@ -45,10 +45,10 @@ The algorithm used as the basis of the MIC is the Context Tree Weighting (CTW) c
 In principle, this allows for comparison of any model that (a) can generate simulated data and (b) is reducible to an Nth order Markov process. The plots below show the output of two tests, on which compares a range of univariate ARMA-ARCH specifications, the other which compares a range of multivariate {% cite Smets_Wouters_2007 %} models. In both cases, the MIC scores are compared to the existing goodness-of-fit measure and show relatively good agreement.
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/mic/arma_arch_scatter.jpg" title="Scatter plot of MIC score vs. log-likelihood for ARMA-ARCH models" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/mic/DSGE_scatter.jpg" title="Scatter plot of MIC score vs. posterior density for DSGE models" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
@@ -64,15 +64,15 @@ While the MIC provides an unbiased measurement of cross entropy, this measuremen
 A good illustration of this is provided in {% cite barde2016direct %}, which applies the MIC to ABMs of herding in financial markets. Here the ABMS of {% cite Gilli_Winker\_2003 %}, {% cite Alfarano_et_al_2005 %} and {% cite Franke_Westerhoff_2011 %}, which are all based on the recruitment mechanism of {% cite Kirman_1993 %}, are tested against a set of benchmark ARCH-GARCH specifications. The result of this work was to establish a clear ranking in performance between ABMs on the data, with the best-performing ABM providing equivalent performance to the best ARCH-GARCH specification. Interestingly, and visible in the plots below, the performance of all 3 ABMs is markedly improved during the financial crisis, which provides some support to the claims that ABMs are better able to account for periods of turmoil.
 
 <div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/mic/USD-YEN_relative score.jpg" title="Relative MIC scores of 4 model classes on the USD-YEN exchange rate" class="img-fluid rounded z-depth-1" %}
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid path="assets/img/mic/USD-YEN_relative_score.jpg" title="Relative MIC scores of 4 model classes on the USD-YEN exchange rate" class="img-fluid rounded z-depth-1" %}
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
+    <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid path="assets/img/mic/DAX_relative_score.jpg" title="Relative MIC scores of 4 model classes on the DAX index" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
-  The MIC maps (noisily) to standard goodness-of-fit measures. On the left plot, MIC scores are plotted against the log-likelihood for an ARMA-ARCH process on the right, MIC scores are plotted against the posterior density for 3 different versions of the Smets Wouters model.
+  Thiese examples, taken from the 2016 direct comparison paper, show how the MIC tracks the relative performance of 3 ABMs against an ARCH-like benchmark for stock indices (left) and exchange rates (right). Note the improvement in relative scores for all ABMs during the 2008 financial crisis!
 </div>
 
 ### Project contributions
