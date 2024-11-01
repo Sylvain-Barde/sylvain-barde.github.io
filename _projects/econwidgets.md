@@ -22,6 +22,8 @@ Used in my slides, using the RISE plugin, and also in interactive notebooks for 
 
 #### Mathematics widgets
 
+The first set of widgets applies to Mathematics. Our typical student cohort does not have a strong mathematical background, therefore I had to find inuitive ways of presenting and illustreating key maths concepts such as matrices, derivatives, etc. to an audience with limited backgrounds in mathematics. This is where the widgets provide a great visual tool.
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/img/ecnwdg/matrix_widget.png" title="Output of the matrix widget" class="img-fluid rounded z-depth-1" %}
@@ -59,7 +61,7 @@ The great aspect here is the possibility of running Monte-Carlo exercises in the
         {% include figure.liquid loading="eager" path="assets/img/ecnwdg/hypothesis_test_widget.png" title="Output of the hypothesis test widget" class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/ecnwdg/error_type.png" title="Output of the typeI/II error widget" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/ecnwdg/error_type_widget.png" title="Output of the typeI/II error widget" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -67,6 +69,8 @@ The great aspect here is the possibility of running Monte-Carlo exercises in the
 </div>
 
 #### Application widgets
+
+Finally, because the main modules I teach are called 'Mathamatics for Economics' and 'Statistics for Economics', I guess I feel compelled to add some economics as well... So I also have a range of application widgets, which show how the relevant mathematical/statistical concept is used in the context of economics.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
