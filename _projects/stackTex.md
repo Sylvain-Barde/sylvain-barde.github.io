@@ -31,6 +31,7 @@ The sections below provide an overview of the stackTex toolbox functionality. A 
 
 Illustrate with a simple example, more a provided in the GitHub repo
 
+{% raw %}
 ```Latex
 %-------------------------------------------------------------------------------
 % This section contains the randomised exercise parameters
@@ -142,6 +143,7 @@ ${r3} + {qBp1}y + \frac{{r5}}{y^{qBp2}}$
 4
 
 ```
+{% endraw %}
 
 ### PDF and STACK outputs
 
