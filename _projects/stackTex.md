@@ -15,21 +15,21 @@ related_publications: False
 
 ### Overview
 
-When I took over the first year *Mathematics for Economics* and *Statistics for Economics* modules in 2019, we had poor engagement with the material and a range of student abilities. Needed regular practice, which only happens if given carrots. But the marking load implied was impossible. Automation was the key!
+As explained in the [econWidgets](https://sylvain-barde.github.io/projects/econwidgets/) projet, when I took over the first year *Mathematics for Economics* and *Statistics for Economics* modules in 2019, we had problems stemming from a combination of poor student engagement with the material and a great heterogeneity in the range of student abilities. The latter problem in turn came from the fact that Kent doesn't have a requirements to have an A-level in maths to study economics. This is great in terms of accessibility, offering the benefits of an economics degree to students who might not otherwise be able to go down tht route. But it's challengingin terms of delivering the teaching. The conundrum here is that becoming proficient in mathematics or statistics requires regular practice, for example, solcing a lot of problem sets. Students, however, often don't engage with material unless it is assessed and carries a mark, and regular marking of assessments requires a lot of resources. Needless to say, multiple problem sets a week for a cohorst of around 250 students was a non starter. 
 
-This became invaluable during covid, where online assessment was the only option.
+The solution to this is of course automated marking, but I wanted something that was more flexible than the standard multiple-choice quiz which is often the only option in these situations. Having played around with ways of implementing maths quizes as part of a 'technology in learning' module I took while doing my [PGCHE](https://www.postgrad.com/subjects/teaching_education/pgche/), I knew of the existence of the [STACK](https://stack-assessment.org/) plugin, which extends the popular [Moodle](https://moodle.org/) virtual learning environment and allows symbolic algebra questions to be integrated into the maths quiz using [Maxima](https://maxima.sourceforge.io/) under the hood. Because my University already ran Moodle, implementing STACK questions was not that complicated. The main problems I was faing were:
+- The sunk cost of taking the **hundreds** of excellent problem sets that had been gathered by the previous professors over decades, and writing them up in STACK. Most of these were in old Microsoft Word files and needed updating anyway.
+- Having to maintain two parallel question banks containing the same problem sets: one in text files (Word or Latex) and one in STACK/Moodle. Inevitably, divergences would appear...
 
-[STACK](https://stack-assessment.org/)
+This is where I had the idea for stackTex, a python toolkit for parsing Mathematics and Statistics exerccises written in Latex (using a flexible template), saving a **single** question bank than can then be used to generate a range of outputs: PDF worksheetss for seminar practice, PDF exam papers for final assessments, and XML outputs compatible with Moodle/STACK quizzes. What spurred me into action was the covid pandemic, where online teaching and assessment becaume the norm, and the ability to randomise numerical assessments at the student-level to avoid cheating was invaluable. While developping stackTex was time-consuming, in practice it saved even more time!
 
-[Moodle](https://moodle.org/)
-
-[stackTex](https://github.com/Sylvain-Barde/stackTex)
-
-The sections below provide an overview of the stackTex toolbox functionality. A full description is available on the [stackTex](https://github.com/Sylvain-Barde/stackTex) repo, which includes an entire demonstration folder containing a working example of a question bank and quizzes.
+The sections below provides an overview of the stackTex toolbox functionality. A full description is available on the [stackTex](https://github.com/Sylvain-Barde/stackTex) repo, which includes an entire demonstration folder containing a working example of a question bank and quizzes.
 
 #### Latex exercise template
 
-Illustrate with a simple example, more a provided in the GitHub repo
+The Latex exercises need to be written using a standard template in order to ensure that all the fields are corretly imported. The simple example below is provided as an illustration, and more are available in the GitHub repo. 
+
+A key aspect of the template is the ability to declare (random) and variables for the exercises. Essentially, this provides the numerical 'backbone' for the exercise, linking the exercise solutions and any student feedback to the deep settings of the random number generator. These variables and paramewters then directly enter the latex text in the questions and solutions, and when implemented in STACK, the solution provided by a student can be checked agaist the exercise soltution.
 
 {% raw %}
 ```Latex
@@ -147,7 +147,7 @@ ${r3} + {qBp1}y + \frac{{r5}}{y^{qBp2}}$
 
 ### PDF and STACK outputs
 
-Note the randomisation
+Once imported, two types of output are possible: PDF and XML (for importing to Moodle/STACK). The figure below shows how the Latex exercise example above looks in both formats. Note the role of the randomisation: the exercise structure is the same in both cases, but the equaation and its derivatives are clearly different.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -161,7 +161,12 @@ Note the randomisation
     The output of the example question. on the left the PDF, on the right the Moodle version.
 </div>
 
-solutions. Note the auto-grading
+The template allows for question-specific feedbaack and solutions to be included, so that:
+- PDF solution documents can be generated, destined either for students themselves, for example at the end of a seminar, or for anyone in a marking team who might have to grade an formal exam.
+- Moodle/STACK quizzes cqn provide feedback to students once their assessment is submitted. 
+solutions.
+
+The figure below again shows what this looks like for the Latex example. Importantly, Note the way the STACK auto-grading is able to assess the artihmetic equivalence of the student input, in particular $$y^{-n} = \frac{1}{y^n}$$. This is a feature of STACK, not stackTex itself, but is one of the things that make it appealing for setting more challenging mathematics exercises, where the solution can legitimately be written in several ways.
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -172,12 +177,12 @@ solutions. Note the auto-grading
     </div>
 </div>
 <div class="caption">
-    The solutions of the example question. on the left the PDF, on the right the Moodle version.
+    The solutions of the example question. On the left the PDF, on the right the Moodle version.
 </div>
 
 #### More complex behaviour is possible
 
-Illustrations
+The example used in this post only showcases the basic functionality. In particular, tables and figures can be integrated in the exercises, generating more complex exercises. Here are some examples of figures from my existing question banks:
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -196,10 +201,10 @@ Illustrations
     </div>
 </div>
 <div class="caption">
-    Some illustrations of the possible plots. Clockwise from top left: the CLT in practice, probabilities as areas under a distribution, type I and type II errors, the logic behind hypothesis testing.
+    Some illustrations of the question bank figures Clockwise from top left: the solution to a system of two equations and two unknowns, the maximisation of a quadratic, test statistics and critical values in hypothesis testing and a fistogram for a table of frequencies.
 </div>
 
-Tables
+Here are two examples of tables:
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -216,16 +221,15 @@ Tables
 ### Project contributions
 
 What bits does this project reach that others don't?
-- Randomisation
-- Handles BOTH pdf and online outputs
-- Automated grading
-- Platform independent as based on open-source resources. Not linked to any specific publisher.
-
+- The **key** feature is that it handles **both** pdf and online outputs, which is really important when delivering a university module. It's greaat to use online quizzes, but you also have to run tutorials, seminars and provide revision resources, often as PDF documents, and being able to manage both formats with a single tool is a time saver.
+- An attractive aspect is that stackTex supports the 'out-of-the-box' randomisation of the exercises provided by the STACK plugin. This is not a requirement, exercises can be written with fixed parameters, but is nice to have for online assessment.
+- Similarly, the ability to use a pretty clever [CAS](https://en.wikipedia.org/wiki/Computer_algebra_system) for automated grading is a force multiplier for teaching mathematics. I can give my 250 students weekly practice quizzes, essentially ensuring that they practice maths regularly, without incurring the massive marking cost. Clearly, this provided by STACK itself, not by stackTex, but the toolkit lowers the entry cost of accessing these systems.
+- Finally, this provides an open-source way of gaining the benefits of automated grading. I regularly get visits from various agents representing publishers, who all at this point offer variations of online platforms providing the same service. Most of them are great, but require licenses or lock you into a specific textbook. This does not...
 
 ### Areas of improvement
 
 Things I'm not that happy about right now.
 
-- Not as slick as a publisher platform. Inputting answers using latex syntax can be challenging for undergraduate students, so a lot of care has to be taken to explain this
-- Doesn't support the feedback tree, only a true/false assessment. Could in principle be extended by hand, thus providing a stating points
-- Accessibility of PDFs produced. This is a wider issue with Latex documents, but as progress is made, the various solutions might be worth investigated.
+- First, the flipside of the coin I mentioned above. This is not as slick as a publisher platform. I particular, the examples above show that answers need to be inputted using latex syntax, while a lot of paid-for platforms will offer more userr-frienly GUIs. Figuring out how to input answers can be challenging for undergraduate students, so a lot of care has to be taken to explain this.
+- STACK offers a pretty sophisticated feedback tree system, where an answer that is incorrect can be passed to a series of secondary checks, so that a range of feedback can be provided based on the severity of the error. Currently, stackTex does not support the feedback tree, only the initial true/false assessment. Should a user want to provide this, they would have to extend the gfeedback tree by hand, and StackTex would only provide a stating point.
+- Finally, there is the problem of the accessibility of the PDFs produced from the Latex input. This is a wider issue that affects all Latex documents in general. Progress is being made, for example the `accessibility` and `axesibility` packages, at some point I will investigate if this can be included here.
