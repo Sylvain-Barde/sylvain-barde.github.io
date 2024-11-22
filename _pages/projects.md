@@ -2,7 +2,7 @@
 layout: page
 title: projects
 permalink: /projects/
-description: Here is a collection of the various coding projects that might be helpful to others.
+description: Here is a collection of the various coding projects I've produced that might be helpful to others.
 nav: true
 nav_order: 3
 display_categories: [research, teaching]

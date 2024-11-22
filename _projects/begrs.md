@@ -100,5 +100,5 @@ As a sanity check, and an illustration of the last two points, I ran a simple Mo
 
 Well, a lot of nice things were sacrificed as part of the drive to make a simple model that generalises well with minimal training data.
 
-- Vecchia approximation might not be appropriate for non-linear responses
-- Will struggle with discontinuities in response. This will slow convergence with respect to the number of training samples
+- The Vecchia approximation (i.e. one-step ahead prediction_) might not be appropriate for models with highly non-linear responses or long memory. The VAR(1) case is fine, but SBC analyses of longer memory models reveal that the BEGRS posterior is often too narrow.
+- Similarly, the Sobol sampling scheme used in my current BEGRS applications will struggle with discontinuities in the responses. This will slow convergence with respect to the number of training samples, requiring further training samples. I aim to investigate this using either deep gaussian learning, or adaptive sampling methods (e.g. Bayesian sampling based on prediction entropy).
