@@ -18,6 +18,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am a Senior Lecturer in Economics at the University of Kent.
+I am a Reader in Economics at the University of Kent.
 
 I have a wide range of interests and find it a bit tricky to categorise myself: I am part computational economist, part econometrician, with interests in spatial econometrics, regional science, agent based models and pretty much any economic problem that faces computational constraints.
